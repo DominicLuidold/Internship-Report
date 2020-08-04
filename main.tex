@@ -11,17 +11,20 @@
 \usepackage[linktocpage=true]{hyperref} % Links -> \href{https://www.wikibooks.org}{Wikibooks home}
 \usepackage[bindingoffset=8mm]{geometry} % Bindeverlust von 8mm einbeziehen
 \usepackage{caption} % Abbildungslegenden
+\usepackage{xcolor} % Farbige Hervorhebungen
+\usepackage{setspace} % Zeilenabstand
 \captionsetup{format=hang, justification=raggedright}
 
 % Literaturverweise:
 \usepackage[style=authoryear,citestyle=authoryear,backend=biber]{biblatex}   
-\addbibresource{Zotero-Beispiele.bib}
+\addbibresource{Zotero.bib}
 
 % Einstellungen:
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{4} % Tiefe der Gliederung im Inhaltsverzeichnis
 
 \begin{document}
+\onehalfspacing % Zeilenabstand 1,5
 
 % evtl. Sperrvermerkseite
 \thispagestyle{empty}
@@ -47,7 +50,7 @@ Veröffentlichung, Vervielfältigung und Einsichtnahme sind ohne ausdrückliche 
 \thispagestyle{empty}
 \begin{titlepage}
   \begin{flushright}
-  \includegraphics[width=0.4\linewidth]{Logo-A3}
+  \includegraphics[width=0.4\linewidth]{Logo_FHV.jpg}
   \end{flushright}
   \begin{flushleft}
   \section*{[Titel der Arbeit]}
@@ -98,11 +101,12 @@ Veröffentlichung, Vervielfältigung und Einsichtnahme sind ohne ausdrückliche 
 
 [text of the abstract]
 
-% evtl. Vorwort:
+% Vorwort:
 \newpage
-\section*{[evtl. Vorwort]}
+\section*{Vorwort}
 
-[Text des Vorworts]
+Der Verfasser der vorliegenden Arbeit bekennt sich zu einer geschlechtergerechten Sprachverwendung.\\
+Um die Lesbarkeit zu gewährleisten und zugunsten der Textökonomie werden die verwendeten Personen bzw. Personengruppen fix männlich oder weiblich zugeordnet. Zum Beispiel wird immer „die Entwicklerin“ und „der Benutzer“ verwendet. Es wurde besonders darauf geachtet, stereotype Rollenbeschreibungen zu vermeiden. Die insgesamt eventuell dadurch hervorgerufene Irritation bei den Lesenden ist gewünscht und soll dazu beitragen, eine Bewusstheit für die bestehende, Frauen diskriminierende Sprachgewohnheit (generelle Verwendung der männlichen Begriffe für beide Geschlechter) zu wecken bzw. zu stärken. 
 
 % Inhaltsverzeichnis:
 \cleardoublepage % force output to a right page
@@ -125,96 +129,15 @@ Veröffentlichung, Vervielfältigung und Einsichtnahme sind ohne ausdrückliche 
 \chapter*{Abkürzungsverzeichnis}
 \begin{acronym}
  \acro{BLS}{Better Life System}
+ \acro{CQRS}{Command-Query-Responsibility-Segregation}
 \end{acronym}
 
 \chapter{Einleitung}
-Diese Bachelorarbeit verfolgt das Ziel, einen Einblick in das bereits bestehende Backend-System des "Better Life System" (kurz "BLS") der Viterma Handels GmbH, basierend auf der Programmiersprache PHP und dem PHP-Framework Symfony, zu geben.\\
-Das Better Life System, welches mittels eines Angular-Frontends in gängigen Webbrowsern bedient werden kann, erlaubt es Anwenderinnen mithilfe eines Handelsvertreters der Viterma GmbH, ein Badezimmer nach ihren Bedürfnissen 
+Diese Bachelorarbeit verfolgt das Ziel, einen Einblick in die Implementierung und Erweiterung des bereits bestehenden Backend-Systems des {\enquote{Better Life System}} (kurz \enquote{BLS}) der Viterma Handels GmbH mit dem sogenannten \enquote{CQRS}-Pattern zu geben.\\
+Das Better Life System - welches von Fusonic GmbH entwickelt wird und mittels einer Weboberfläche mit gängigen Webbrowsern bedient werden kann - ermöglicht es Endkunden mithilfe einer Handelsvertreterin der Firma Viterma (beziehungsweise mit einer Vertreterin eines ihrer Franchise-Partner) ein Badezimmer anhand der jeweiligen Bedürfnisse auszusuchen und zu konfigurieren und sich schlussendlich ein entsprechendes Angebot dafür erstellen zu lassen.
 
-Das PHP-Backend dient dabei als Schnittstelle zwischen einem Datenbankserver und einem auf Angular aufbauenden JavaScript Frontend.\\
-Im Verlauf der Arbeit wird beleuchtet, wie 
-
-Formatvorlage für den Fließtext. Formatvorlage für den Fließtext. Formatvorlage für den Fließtext. Formatvorlage für den Fließtext. Formatvorlage für den Fließtext. Formatvorlage für den Fließtext. Formatvorlage für den Fließtext. Formatvorlage für den Fließtext. Formatvorlage für den Fließtext. Formatvorlage für den Fließtext. Formatvorlage für den Fließtext.
-\begin{quote}
-  Formatvorlage für ein längeres direktes Zitat. Formatvorlage für ein längeres direktes Zitat. Formatvorlage für ein längeres direktes Zitat. Formatvorlage für ein längeres direktes Zitat. Formatvorlage für ein längeres direktes Zitat. Formatvorlage für ein längeres direktes Zitat….
-\end{quote}
-
-\href{https://www.wikibooks.org}{Wikibooks home}
-
-\chapter{[Kapitel]}
-Formatvorlage für den Fließtext.
-Hier eine Liste.
-\begin{enumerate}
- \item Verstehen
- \item Üben
- \item Können
-\end{enumerate}
-
-
-\section{[Unterkapitel zweite Ebene]}
-Formatvorlage für den Fließtext. Die Abbildung~\ref{fig:ex} auf Seite \pageref{fig:ex} zeigt drei Entladungskurven eines biphasischen Defibrillators.
-\begin{figure}[htb]
-  \centering
-  \includegraphics[width=10cm]{Amann_TechnAbb}
-  \caption[Aufheizverhalten von PTFE]{Das Bild zeigt das Aufheizverhalten von PTFE. \\Quelle: eigene Ausarbeitung}
- \label{fig:ex}
-\end{figure}
-
-
-\section{[Unterkapitel zweite Ebene]}
-Formatvorlage für den Fließtext.
-Jetzt eine Fußnote\footnote{Dies ist eine Fußnote.}
-Die quadratischen Gleichung (\ref{equ:foo}) hat wieviele Nullstellen?
-\begin{equation}
- \label{equ:foo}
- x^2-2x+5=0.
-\end{equation}
-Zwei von Einsteins berühmtesten Formeln lauten:
-\begin{eqnarray*}
-  E &= mc^2                                  \\
-  m &= \frac{m_0}{\sqrt{1-\frac{v^2}{c^2}}}
-\end{eqnarray*}
-
-
-\subsection{[Unterkapitel dritte Ebene]}
-Formatvorlage für den Fließtext. Hier die einfache Tabelle \ref{tab:sp}
-
-\begin{table}[htb]
-  \centering
-  \begin{tabular}{ | l | l |c|}
-    \hline
-    Datum      & Thema           & Raum \\
-    \hline\hline
-    Montag     & Graphentheorie  & U1   \\
-    \hline
-    Donnerstag & Algebra         & MZB23\\
-    \hline
-  \end{tabular}
-  \caption[Stundenplan]{Stundenplan des Jahres 2030.\\Quelle: eigene Ausarbeitung}
-  \label{tab:sp}
-\end{table}
-
-\subsubsection{[Unterkapitel vierte Ebene]}
-Formatvorlage für den Fließtext.
-
-
-
-\section{[Unterkapitel zweite Ebene]}
-
-Verweise: zu einem Buch mit Details \cite[vgl.][Kapitel 2]{bathe_finite-elemente-methoden_1990} oder ohne Details \cite{bathe_finite-elemente-methoden_1990}, ein Buchteil \cite{areger_problem-based_2007}, eine Dissertation \cite{sporn_interaktives_2000}, ein Dokument \cite{industriellenvereinigung_beste_2014}, ein Enzyklopädieartikel \cite{brockhaus_kreativitat_1872}, ein Film \cite{de_wilde_through_2008}, ein Konferenz-Paper \cite{weber_podcasts._2006}, ein Magazin-Artikel \cite{autornachname1_magazinartikeltitel_1995}, ein Pordcast \cite{paulus_horen_????}, eine Tonaufnahme \cite{horowitz_horowitz_2003}, eine Videoaufnahme \cite{fhvlearningsupport_was_2008}, ein Vortrag \cite{kohls_literaturverwaltung_2008}, eine Website \cite{wedekind_von_2008}, ein Zeitschriftenartikel \cite{hofer_wir_2008} und ein Zeitungsartikel \cite{schenkel_tsunami_2012}.
-
-
-\chapter{[Kapitel]}
-
-\section{[Unterkapitel zweite Ebene]}
-Formatvorlage für den Fließtext.
-
-\subsection{[Unterkapitel dritte Ebene]}
-Formatvorlage für den Fließtext.
-
-\subsubsection{[Unterkapitel vierte Ebene]}
-Formatvorlage für den Fließtext.
-
+\section{Arbeitgeber Fusonic GmbH}
+Die Fusonic GmbH hat ihren Firmensitz in Götzis, Vorarlberg, und besteht aus einem Team von aktuell mehr als 25 Mitarbeitern, Softwareentwicklerinnen und Projektleiterinnen. Diese sind aufgeteilt in diverse kleinere Teams, die intern unter anderem \enquote{Duck-Team} beziehungsweise \enquote{Parrot-Team} genannt werden. Die Teams arbeiten dabei an jeweils eigenständigen Projekten und setzen diverse Technologien ein. Zu den verwendeten Technologien gehören unter anderem C\# mit .NET, PHP mit Symfony sowie JavaScript/TypeScript mit Angular. \parencite[vgl.]["Übersicht aller Technologien"]{fusonic_gmbh_web_nodate} Während es  regelmäßigen Austausch unter den Teams gibt, besteht jedes aus Frontend- sowie Backend-Entwicklern, da die meisten Projekte aufgrund der zugrundeliegenden Anwendungsfälle aus einem Backend sowie Web-Frontend bestehen.
 
 % Literaturverzeichnis:
 \clearpage
