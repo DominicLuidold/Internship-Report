@@ -12,6 +12,7 @@
 \usepackage[bindingoffset=8mm]{geometry} % Bindeverlust von 8mm einbeziehen
 \usepackage{caption} % Abbildungslegenden
 \usepackage{xcolor} % Farbige Hervorhebungen
+\usepackage{hyperref} % Verlinkungen im Dokument
 \usepackage{setspace} % Zeilenabstand
 \captionsetup{format=hang, justification=raggedright}
 
@@ -42,7 +43,6 @@ Veröffentlichung, Vervielfältigung und Einsichtnahme sind ohne ausdrückliche 
 \vspace{2cm}
 
 \hfill Firmenstempel\hspace{2cm}
-
 
 % Titelblatt:
 % \newpage\mbox{}\newpage
@@ -83,12 +83,14 @@ Veröffentlichung, Vervielfältigung und Einsichtnahme sind ohne ausdrückliche 
 % Widmung:
 \newpage
 \section*{[Widmung]}
+\label{sec:widmung}
 
 [Text der Widmung]
 
 % Kurzreferat:
 \newpage
 \section*{Kurzreferat}
+\label{sec:kurzreferat}
 
 \subsection*{[Deutscher Titel Ihrer Arbeit]}
 
@@ -97,6 +99,8 @@ Veröffentlichung, Vervielfältigung und Einsichtnahme sind ohne ausdrückliche 
 % Abstract:
 \newpage
 \section*{Abstract}
+\label{sec:abstract}
+
 \subsection*{[English Title of your thesis]}
 
 [text of the abstract]
@@ -104,6 +108,7 @@ Veröffentlichung, Vervielfältigung und Einsichtnahme sind ohne ausdrückliche 
 % Vorwort:
 \newpage
 \section*{Vorwort}
+\label{sec:vorwort}
 
 Der Verfasser der vorliegenden Arbeit bekennt sich zu einer geschlechtergerechten Sprachverwendung.
 
@@ -130,25 +135,36 @@ Um die Lesbarkeit zu gewährleisten und zugunsten der Textökonomie werden die v
 \chapter*{Abkürzungsverzeichnis}
 \begin{acronym}
  \acro{BLS}{Better Life System}
+ \acro{CI}{Continuous Integration}
+ \acro{CD}{Continuous Deployment}
  \acro{CQRS}{Command-Query-Responsibility-Segregation}
 \end{acronym}
 
 \chapter{Einleitung}
+\label{chap:einleitung}
 Diese Bachelorarbeit verfolgt das Ziel, einen Einblick in die Implementierung und Erweiterung des bereits bestehenden Backend-Systems des \enquote{Better Life System} (kurz \enquote{BLS}) der Viterma Handels GmbH mit dem sogenannten \enquote{CQRS}-Pattern zu geben.
 
-Das Better Life System - welches von Fusonic GmbH entwickelt wird und mittels einer Weboberfläche und gängigen Webbrowsern bedient werden kann - ermöglicht es Endkunden mithilfe einer Handelsvertreterin der Firma Viterma (beziehungsweise mit einer Vertreterin eines ihrer Franchise-Partner) ein Badezimmer anhand der jeweiligen Bedürfnisse auszusuchen und zu konfigurieren und sich schlussendlich ein entsprechendes Angebot dafür erstellen zu lassen.
+Das Better Life System - welches von Fusonic GmbH entwickelt wird und mittels einer Weboberfläche und gängigen Webbrowsern bedient werden kann - ermöglicht es Endkunden, mithilfe einer Handelsvertreterin der Firma Viterma (beziehungsweise mit einer Vertreterin eines ihrer Franchise-Partner) ein Badezimmer anhand der jeweiligen Bedürfnisse auszusuchen und zu konfigurieren und sich schlussendlich ein entsprechendes Angebot dafür erstellen zu lassen.
 
 \section{Arbeitgeber Fusonic GmbH}
-Die Fusonic GmbH hat ihren Firmensitz in Götzis, Vorarlberg, und besteht aus einem Team von aktuell mehr als 25 Mitarbeitern, Softwareentwicklerinnen und Projektleiterinnen. Diese sind aufgeteilt in diverse kleinere Teams, die intern unter anderem \enquote{Duck-Team} beziehungsweise \enquote{Parrot-Team} genannt werden. Die Teams arbeiten dabei an jeweils eigenständigen Projekten und setzen diverse Technologien ein. Zu den verwendeten Technologien gehören unter anderem C\# mit .NET, PHP mit Symfony und JavaScript/TypeScript mit Angular. \parencite[vgl.]["Übersicht aller Technologien"]{fusonic_gmbh_web_nodate} Während es  regelmäßigen Austausch unter den Teams gibt, besteht jedes aus Frontend- sowie Backend-Entwicklern, da die meisten Projekte aufgrund der zugrundeliegenden Anwendungsfälle aus einem Web-Frontend sowie serverseitgen Backend bestehen.
+\label{sec:arbeitgeber}
+Die Fusonic GmbH hat ihren Firmensitz in Götzis, Vorarlberg, und besteht aus einem Team von aktuell mehr als 25 Angestellten, Softwareentwicklerinnen und Projektleiterinnen. Diese sind aufgeteilt in diverse kleinere Teams, die intern unter anderem \enquote{Duck-Team} beziehungsweise \enquote{Parrot-Team} genannt werden. Die Teams arbeiten dabei an jeweils eigenständigen Projekten und setzen diverse Technologien ein. Zu den verwendeten Technologien gehören unter anderem C\# mit .NET, PHP mit Symfony und JavaScript/TypeScript mit Angular. \parencite[vgl.]["Übersicht aller Technologien"]{fusonic_gmbh_web_nodate} Während es  regelmäßigen Austausch unter den Teams gibt, besteht jedes aus Frontend- sowie Backend-Entwicklern, da die meisten Projekte - aufgrund der zugrundeliegenden Anwendungsfälle - aus einem Web-Frontend sowie serverseitgen Backend bestehen.
 
-\section{Umfeld \& Nutzung des \enquote{Better Life System}}
-Die Hauptaufgabe des Better Life System liegt darin, als computergestütztes und plattformunabhängiges Tool, Vertreterinnen rund um die Vitmera GmbH bei der Konfiguration und Zusammenstellung eines Badezimmers - zusammen mit dem Endkunden (meist Haus- beziehungsweise Wohnungsbesitzer oder Hotels) - zu unterstützen und diesen Vorgang zu erleichtern. Das BLS wir des Weiteren dazu verwendet, aktuelle und abgeschlossene Angebote zu verwalten, Produkte, Produktinformationen und dazugehörige Preisaufschläge zu pflegen und dient als Kontrollinstanz für in Auftrag gegebene Sanierungen, um sicherzustellen, dass alle benötigten Materialen und Teile in entsprechenden Mengen vorhanden und kompatibel sind.
+\section{Nutzung \& Umfeld des \enquote{Better Life System}}
+\label{sec:umfeld-nutzen}
+Die Hauptaufgabe des Better Life System liegt darin, als computergestütztes und plattformunabhängiges Tool, Vertreterinnen rund um die Vitmera GmbH bei der Konfiguration und Zusammenstellung eines Badezimmers - zusammen mit dem Endkunden (meist Haus- beziehungsweise Wohnungsbesitzer oder Hotels) - zu unterstützen und diesen Vorgang zu erleichtern. Das BLS wir des Weiteren dazu verwendet, aktuelle und abgeschlossene Angebote zu verwalten, Produkte, Produktinformationen und dazugehörige Preisaufschläge zu pflegen und Kundendaten abzulegen. Zudem dient es als Kontrollinstanz für in Auftrag gegebene Sanierungen, um sicherzustellen, dass alle benötigten Materialen und Teile in entsprechenden Mengen vorhanden und kompatibel sind.
 
 Die Nutzung des BLS findet zu großen Teilen auf mobilen Rechnern beziehungsweise Laptops statt, die während der Beratung und Betreuung von Kunden zum Einsatz kommen. Da nicht immer gewährleistet werden kann, dass eine aufrechte Internetverbindung besteht, ist die Offline-Fähigkeit bei gleichbleibender Nutzung im Webbrowser ein wichtiger Bestandteil des Web-Frontends.
 
-Aufgrund der Anforderungen der Viterma GmbH, dass das Better Life System offline ebenso wie online verwendet werden kann, basiert das Frontend auf dem TypeScript Web-Framework Angular\footnote{\href{https://angular.io/}{Angular Website: https://angular.io}}, welches solch eine Funktionalität ohne eine Installation oder zusätzliche Voraussetzungen unterstützt. Im Gegensatz zu eher kleiner gehaltenen Frontends - die primär Daten darstellen, die vom Backend eingehen - ist dieses bei BLS für einen Großteil der Ablauflogik, Berechnung von Preisen und Generierung von diversen PDFs zuständig. Das Frontent wird, da der Fokus dieser Arbeit auf der Entwicklung im Backend der Anwendung liegt, in weiterer Folge jedoch nicht mehr genauer beleuchtet und wird als gegeben angenommen.
+Aufgrund der Anforderungen der Viterma GmbH, dass das Better Life System offline ebenso wie online verwendet werden kann, basiert das Frontend auf dem TypeScript Web-Framework Angular\footnote{\href{https://angular.io/}{Angular (https://angular.io)}}, welches solch eine Funktionalität ohne eine Installation oder zusätzliche Voraussetzungen am Endgerät unterstützt. Im Gegensatz zu weniger komplex gehaltenen Frontends - die primär Daten darstellen, die vom Backend eingehen - ist dieses beim BLS für einen Großteil der Ablauflogik, Berechnung von Preisen und Generierung von diversen PDFs zuständig. Das Frontend wird, da der Fokus dieser Arbeit auf der Entwicklung im Backend der Anwendung liegt, in weiterer Folge jedoch nicht genauer beleuchtet und als gegeben angenommen. Es kann davon ausgegangen werden, dass eingehende Anfragen an das Backend aus Benutzereingaben beziehungsweise zeitlich gesteuerten Events resultieren.
 
-Das Backend, welches in der Programmiersprache PHP geschrieben ist, verwendet das Framework Symfony\footnote{\href{https://symfony.com/}{Symfony Website: https://symfony.com/}} und diverse sogenannte \enquote{Bundles}, die darauf aufbauen. Ein detaillierterer Überblick über den Stand der Technik erfolgt im TODO.
+\pagebreak
+
+Das Backend, welches alle API-Anfragen bearbeitet und als Schnittstelle zur Datenbank dient, ist in der Programmiersprache PHP geschrieben und verwendet das Framework Symfony\footnote{\href{https://symfony.com/}{Symfony (https://symfony.com)}} sowie diverse \enquote{Bundles}, die darauf aufbauen. Ein detaillierterer Überblick über den Aufbau, bisher angewandte Konzepte sowie technische Begebenheiten werden in \textit{\hyperref[chap:stand-technik]{Kapitel 2 - \enquote{Stand der Technik}}} behandelt.
+
+\medbreak
+
+Während die Nutzung des Better Life System auf allen Plattformen - die einen modernen Webbrowser anbieten - möglich ist, findet die Entwicklung primär auf der Linux-Distribution  Ubuntu statt. Der Grund für diese Betriebssystemwahl ist damit zu erklären, dass sowohl die lokale Entwicklung als auch die Continuous Integration Umgebung (genutzt für automatisierte Tests) und das Continuous Deployment mittels Docker\footnote{\href{https://docker.com}{Docker (https://docker.com)}} Containern stattfindet. Für die Entwicklung im Backend-Bereich der Anwendung wird die IDE PhpStorm verwendet, während im Frontend auf Visual Studio Code gesetzt wird.
 
 \section{Problemstellung}
 
@@ -158,6 +174,8 @@ Das Backend, welches in der Programmiersprache PHP geschrieben ist, verwendet da
 \section{Zielsetzung}
 
 \chapter{Stand der Technik}
+\label{chap:stand-technik}
+
 \colorbox{yellow}{TODO}
 
 % Literaturverzeichnis:
