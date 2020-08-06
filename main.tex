@@ -5,7 +5,9 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc} % Silbentrennung bei Sonderzeichen
 \usepackage{graphicx} % Bilder einbinden
+\usepackage{wrapfig} % Bilder positionieren
 \usepackage[ngerman]{babel} % Deutsche Sprachanpassungen
+\usepackage{minted} % Code Highlighting/Import
 \usepackage{csquotes} % When using babel or polyglossia with biblatex, loading csquotes is recommended to ensure that quoted texts are typeset according to the rules of your main language.
 \usepackage{acronym} % Abkürzungsverzeichnis
 \usepackage[linktocpage=true]{hyperref} % Links -> \href{https://www.wikibooks.org}{Wikibooks home}
@@ -23,6 +25,10 @@
 % Einstellungen:
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{4} % Tiefe der Gliederung im Inhaltsverzeichnis
+
+% Custom Commands
+\renewcommand{\listingscaption}{Quellcode}
+\renewcommand\listoflistingscaption{Quellcodeverzeichnis}
 
 \begin{document}
 \onehalfspacing % Zeilenabstand 1,5
@@ -50,7 +56,7 @@ Veröffentlichung, Vervielfältigung und Einsichtnahme sind ohne ausdrückliche 
 \thispagestyle{empty}
 \begin{titlepage}
   \begin{flushright}
-  \includegraphics[width=0.4\linewidth]{Logo_FHV.jpg}
+  \includegraphics[width=0.4\linewidth]{images/Logo_FHV.jpg}
   \end{flushright}
   \begin{flushleft}
   \section*{[Titel der Arbeit]}
@@ -125,6 +131,10 @@ Um die Lesbarkeit zu gewährleisten und zugunsten der Textökonomie werden die v
 
 \clearpage
 \phantomsection
+\listoflistings
+
+\clearpage
+\phantomsection
 \addcontentsline{toc}{chapter}{Tabellenverzeichnis}
 \listoftables
 
@@ -138,6 +148,8 @@ Um die Lesbarkeit zu gewährleisten und zugunsten der Textökonomie werden die v
  \acro{CI}{Continuous Integration}
  \acro{CD}{Continuous Deployment}
  \acro{CQRS}{Command-Query-Responsibility-Segregation}
+ \acro{CRUD}{Create, Read, Update, Delete}
+ \acro{DTO}{Data Transfer Object}
 \end{acronym}
 
 \chapter{Einleitung}
@@ -151,7 +163,7 @@ Das Better Life System - welches von Fusonic GmbH entwickelt wird und mittels ei
 Die Fusonic GmbH hat ihren Firmensitz in Götzis, Vorarlberg, und besteht aus einem Team von aktuell mehr als 25 Angestellten, Softwareentwicklerinnen und Projektleiterinnen. Diese sind aufgeteilt in diverse kleinere Teams, die intern unter anderem \enquote{Duck-Team} beziehungsweise \enquote{Parrot-Team} genannt werden. Die Teams arbeiten dabei an jeweils eigenständigen Projekten und setzen diverse Technologien ein. Zu den verwendeten Technologien gehören unter anderem C\# mit .NET, PHP mit Symfony und JavaScript/TypeScript mit Angular. \parencite[vgl.]["Übersicht aller Technologien"]{fusonic_gmbh_web_nodate} Während es  regelmäßigen Austausch unter den Teams gibt, besteht jedes aus Frontend- sowie Backend-Entwicklern, da die meisten Projekte - aufgrund der zugrundeliegenden Anwendungsfälle - aus einem Web-Frontend sowie serverseitgen Backend bestehen.
 
 \section{Nutzung \& Umfeld des \enquote{Better Life System}}
-\label{sec:umfeld-nutzen}
+\label{sec:nutzung-umfeld}
 Die Hauptaufgabe des Better Life System liegt darin, als computergestütztes und plattformunabhängiges Tool, Vertreterinnen rund um die Vitmera GmbH bei der Konfiguration und Zusammenstellung eines Badezimmers - zusammen mit dem Endkunden (meist Haus- beziehungsweise Wohnungsbesitzer oder Hotels) - zu unterstützen und diesen Vorgang zu erleichtern. Das BLS wir des Weiteren dazu verwendet, aktuelle und abgeschlossene Angebote zu verwalten, Produkte, Produktinformationen und dazugehörige Preisaufschläge zu pflegen und Kundendaten abzulegen. Zudem dient es als Kontrollinstanz für in Auftrag gegebene Sanierungen, um sicherzustellen, dass alle benötigten Materialen und Teile in entsprechenden Mengen vorhanden und kompatibel sind.
 
 Die Nutzung des BLS findet zu großen Teilen auf mobilen Rechnern beziehungsweise Laptops statt, die während der Beratung und Betreuung von Kunden zum Einsatz kommen. Da nicht immer gewährleistet werden kann, dass eine aufrechte Internetverbindung besteht, ist die Offline-Fähigkeit bei gleichbleibender Nutzung im Webbrowser ein wichtiger Bestandteil des Web-Frontends.
@@ -167,7 +179,27 @@ Das Backend, welches alle API-Anfragen bearbeitet und als Schnittstelle zur Date
 Während die Nutzung des Better Life System auf allen Plattformen - die einen modernen Webbrowser anbieten - möglich ist, findet die Entwicklung primär auf der Linux-Distribution  Ubuntu statt. Der Grund für diese Betriebssystemwahl ist damit zu erklären, dass sowohl die lokale Entwicklung als auch die Continuous Integration Umgebung (genutzt für automatisierte Tests) und das Continuous Deployment mittels Docker\footnote{\href{https://docker.com}{Docker (https://docker.com)}} Containern stattfindet. Für die Entwicklung im Backend-Bereich der Anwendung wird die IDE PhpStorm verwendet, während im Frontend auf Visual Studio Code gesetzt wird.
 
 \section{Problemstellung}
+\label{sec:problemstellung}
+Die Entwicklung des BLS hat im Herbst \colorbox{yellow}{2018} begonnen und die Anwendung ist seit dem stetig weiterentwickelt worden. Über die Zeit haben sich entsprechend sowohl die Anforderungen und Wünsche des Kunden als auch die technischen Begebenheiten, Best Practices und Möglichkeiten verändert.
 
+Die bisher bei der Umsetzung des Projekts verwendete Struktur sowie der Aufbau wurde stark an die empfohlene Herangehensweise von Symfony angelehnt und die Code-Basis entsprechend darauf ausgelegt \parencite[siehe dazu][\enquote{The Symfony Framework Best Practices}]{symfony_symfony_nodate}. Durch wachsende Anforderungen und entsprechend benötigten Programmcode, der diese erfüllt, hat sich jedoch ein komplexes System ergeben, dessen \textit{Controller}, \textit{Entities}, \textit{Services} und \textit{Data Transfer Objects (DTOs)} auf viele Verzeichnisse und Unterverzeichnisse verteilt sind. Die Abbildung~\ref{fig:ordnerstruktur} auf Seite \pageref{fig:ordnerstruktur} zeigt einen Ausschnitt der Ordner, die im Projekt vorkommen und teilweise weitere Ordner mit diversen Klasen, Traits etc. beinhalten.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.75]{images/bls_folder_structure.png}
+    \caption{Teilausschnitt der BLS-Ordnerstruktur}
+    \label{fig:ordnerstruktur}
+\end{figure}
+
+Die aktuelle Herangehensweise hat im weiteren Verlauf das Problem, dass Controller - die unter für die Definition der Routen der API Endpunkte, das Zusammentragen von Daten und der Erstellung einer \textit{Response} zuständig sind - schnell unübersichtlich und komplex werden können. Der Quellcode~\ref{code:sample-controller} auf Seite \pageref{code:sample-controller} zeigt ein Beispiel für ein Controller, der exemplarisch Routen für einen API Endpunkt mit CRUD-Funktionalität definiert. Es ist hierbei bereits zu erkennen, dass mit vorhandener Implementierung eine effektive Kapselung zusammengehörender Funktionalitäten samt ihrer Abhängigkeiten schwer zu erreichen ist.
+
+\begin{listing}[ht]
+    \inputminted[fontsize=\footnotesize,linenos,breaklines]{php}{code/current_controller_sample.php}
+    \caption{Beispiel Controller mit definierten Routen für CRUD-Funktionalität}
+    \label{code:sample-controller}
+\end{listing}
+
+\clearpage
 
 \section{Anforderungen}
 
