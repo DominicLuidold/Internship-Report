@@ -8,21 +8,18 @@
 \usepackage{wrapfig} % Bilder positionieren
 \usepackage[ngerman]{babel} % Deutsche Sprachanpassungen
 \usepackage{minted} % Code Highlighting/Import
-\usepackage{csquotes} % When using babel or polyglossia with biblatex, loading csquotes is recommended to ensure that quoted texts are typeset according to the rules of your main language.
+\usepackage{csquotes} % Anführungszeichen und Zitieren
 \usepackage{acronym} % Abkürzungsverzeichnis
-\usepackage[linktocpage=true]{hyperref} % Links -> \href{https://www.wikibooks.org}{Wikibooks home}
 \usepackage[bindingoffset=8mm]{geometry} % Bindeverlust von 8mm einbeziehen
 \usepackage{caption} % Abbildungslegenden
 \usepackage{xcolor} % Farbige Hervorhebungen
-\usepackage{hyperref} % Verlinkungen im Dokument
 \usepackage{setspace} % Zeilenabstand
-\captionsetup{format=hang, justification=raggedright}
-
-% Literaturverweise:
-\usepackage[style=authoryear,citestyle=authoryear,backend=biber]{biblatex}   
-\addbibresource{Zotero.bib}
+\usepackage[style=authoryear,citestyle=authoryear,backend=biber]{biblatex} % Literaturverweise
+\usepackage[linktocpage=true]{hyperref} % Links -> \href{https://www.wikibooks.org}{Wikibooks home}
 
 % Einstellungen:
+\captionsetup{format=hang, justification=raggedright}
+\addbibresource{Zotero.bib}
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{4} % Tiefe der Gliederung im Inhaltsverzeichnis
 
@@ -30,6 +27,7 @@
 \renewcommand{\listingscaption}{Quellcode}
 \renewcommand\listoflistingscaption{Quellcodeverzeichnis}
 
+% Dokumentenbeginn
 \begin{document}
 \onehalfspacing % Zeilenabstand 1,5
 
@@ -55,35 +53,35 @@ Veröffentlichung, Vervielfältigung und Einsichtnahme sind ohne ausdrückliche 
 \cleardoublepage   % force output to a right page
 \thispagestyle{empty}
 \begin{titlepage}
-  \begin{flushright}
-  \includegraphics[width=0.4\linewidth]{images/Logo_FHV.jpg}
-  \end{flushright}
-  \begin{flushleft}
-  \section*{[Titel der Arbeit]}
-  \subsection*{[Untertitel der Arbeit]}
-  \vspace{1cm}
-  
-  Bachelorarbeit I\\
-  zur Erlangung des akademischen Grades
-  \vspace{0.5cm}
-  
-  \textbf{Bachelor of Science in Engineering (BSc)}
+    \begin{flushright}
+    \includegraphics[width=0.4\linewidth]{images/Logo_FHV.jpg}
+    \end{flushright}
+    \begin{flushleft}
+    \section*{[Titel der Arbeit]}
+    \subsection*{[Untertitel der Arbeit]}
+    \vspace{1cm}
 
-  \vspace{1cm}
-  Fachhochschule Vorarlberg\newline
-  Informatik – Software and Information Engineering
+    Bachelorarbeit I\\
+    zur Erlangung des akademischen Grades
+    \vspace{0.5cm}
 
-  \vspace{0.5cm}
-  
-  Betreut von\newline
-  Prof. (FH) Dipl. Inform. Thomas Feilhauer
-  
-  \vspace{0.5cm}
-  
-  Vorgelegt von\newline
-  Dominic Luidold\newline
-  Dornbirn, November 2020
-  \end{flushleft}
+    \textbf{Bachelor of Science in Engineering (BSc)}
+
+    \vspace{1cm}
+    Fachhochschule Vorarlberg\newline
+    Informatik – Software and Information Engineering
+
+    \vspace{0.5cm}
+
+    Betreut von\newline
+    Prof. (FH) Dipl. Inform. Thomas Feilhauer
+
+    \vspace{0.5cm}
+
+    Vorgelegt von\newline
+    Dominic Luidold\newline
+    Dornbirn, November 2020
+    \end{flushleft}
 \end{titlepage}
 
 % Widmung:
@@ -118,7 +116,7 @@ Veröffentlichung, Vervielfältigung und Einsichtnahme sind ohne ausdrückliche 
 
 Der Verfasser der vorliegenden Arbeit bekennt sich zu einer geschlechtergerechten Sprachverwendung.
 
-Um die Lesbarkeit zu gewährleisten und zugunsten der Textökonomie werden die verwendeten Personen bzw. Personengruppen fix männlich oder weiblich zugeordnet. Zum Beispiel wird immer „die Entwicklerin“ und „der Benutzer“ verwendet. Es wurde besonders darauf geachtet, stereotype Rollenbeschreibungen zu vermeiden. Die insgesamt eventuell dadurch hervorgerufene Irritation bei den Lesenden ist gewünscht und soll dazu beitragen, eine Bewusstheit für die bestehende, Frauen diskriminierende Sprachgewohnheit (generelle Verwendung der männlichen Begriffe für beide Geschlechter) zu wecken bzw. zu stärken. 
+Um die Lesbarkeit zu gewährleisten und zugunsten der Textökonomie werden die verwendeten Personen beziehungsweise Personengruppen fix männlich oder weiblich zugeordnet. Zum Beispiel wird immer \enquote{die Entwicklerin} und \enquote{der Benutzer} verwendet. Es wurde besonders darauf geachtet, stereotype Rollenbeschreibungen zu vermeiden. Die insgesamt eventuell dadurch hervorgerufene Irritation bei den Lesenden ist gewünscht und soll dazu beitragen, eine Bewusstheit für die bestehende, Frauen diskriminierende Sprachgewohnheit (generelle Verwendung der männlichen Begriffe für beide Geschlechter) zu wecken beziehungsweise zu stärken.
 
 % Inhaltsverzeichnis:
 \cleardoublepage % force output to a right page
@@ -131,6 +129,7 @@ Um die Lesbarkeit zu gewährleisten und zugunsten der Textökonomie werden die v
 
 \clearpage
 \phantomsection
+\addcontentsline{toc}{chapter}{Quellcodeverzeichnis}
 \listoflistings
 
 \clearpage
@@ -147,7 +146,7 @@ Um die Lesbarkeit zu gewährleisten und zugunsten der Textökonomie werden die v
  \acro{BLS}{Better Life System}
  \acro{CI}{Continuous Integration}
  \acro{CD}{Continuous Deployment}
- \acro{CQRS}{Command-Query-Responsibility-Segregation}
+ \acro{CQRS}{Command Query Responsibility Segregation}
  \acro{CRUD}{Create, Read, Update, Delete}
  \acro{DTO}{Data Transfer Object}
 \end{acronym}
@@ -156,7 +155,7 @@ Um die Lesbarkeit zu gewährleisten und zugunsten der Textökonomie werden die v
 \label{chap:einleitung}
 Diese Bachelorarbeit verfolgt das Ziel, einen Einblick in die Implementierung und Erweiterung des bereits bestehenden Backend-Systems des \enquote{Better Life System} (kurz \enquote{BLS}) der Viterma Handels GmbH mit dem sogenannten \enquote{CQRS}-Pattern zu geben.
 
-Das Better Life System - welches von Fusonic GmbH entwickelt wird und mittels einer Weboberfläche und gängigen Webbrowsern bedient werden kann - ermöglicht es Endkunden, mithilfe einer Handelsvertreterin der Firma Viterma (beziehungsweise mit einer Vertreterin eines ihrer Franchise-Partner) ein Badezimmer anhand der jeweiligen Bedürfnisse auszusuchen und zu konfigurieren und sich schlussendlich ein entsprechendes Angebot dafür erstellen zu lassen.
+Das Better Life System - welches von Fusonic GmbH entwickelt wird und mittels einer Weboberfläche und gängigen Webbrowsern bedient werden kann - ermöglicht es Endkunden, mithilfe einer Handelsvertreterin der Firma Viterma (beziehungsweise mit einer Vertreterin eines ihrer Franchise-Partner) ein Badezimmer anhand der jeweiligen Bedürfnisse auszusuchen und zu konfigurieren, um sich schlussendlich ein entsprechendes Angebot dafür erstellen zu lassen.
 
 \section{Arbeitgeber Fusonic GmbH}
 \label{sec:arbeitgeber}
@@ -172,7 +171,7 @@ Aufgrund der Anforderungen der Viterma GmbH, dass das Better Life System offline
 
 \pagebreak
 
-Das Backend, welches alle API-Anfragen bearbeitet und als Schnittstelle zur Datenbank dient, ist in der Programmiersprache PHP geschrieben und verwendet das Framework Symfony\footnote{\href{https://symfony.com/}{Symfony (https://symfony.com)}} sowie diverse \enquote{Bundles}, die darauf aufbauen. Ein detaillierterer Überblick über den Aufbau, bisher angewandte Konzepte sowie technische Begebenheiten werden in \textit{\hyperref[chap:stand-technik]{Kapitel 2 - \enquote{Stand der Technik}}} behandelt.
+Das Backend, welches alle API-Anfragen bearbeitet und als Schnittstelle zur Datenbank dient, ist in der Programmiersprache PHP geschrieben und verwendet das Framework Symfony\footnote{\href{https://symfony.com/}{Symfony (https://symfony.com)}} sowie diverse \enquote{Bundles}, die darauf aufbauen. Ein detaillierterer Überblick über den Aufbau, bisher angewandte Konzepte sowie technische Begebenheiten werden in Kapitel~\ref{chap:stand-technik} auf Seite \pageref{chap:stand-technik} behandelt.
 
 \medbreak
 
@@ -191,7 +190,7 @@ Die bisher bei der Umsetzung des Projekts verwendete Struktur sowie der Aufbau w
     \label{fig:ordnerstruktur}
 \end{figure}
 
-Die aktuelle Herangehensweise hat im weiteren Verlauf das Problem, dass Controller - die unter für die Definition der Routen der API Endpunkte, das Zusammentragen von Daten und der Erstellung einer \textit{Response} zuständig sind - schnell unübersichtlich und komplex werden können. Der Quellcode~\ref{code:sample-controller} auf Seite \pageref{code:sample-controller} zeigt ein Beispiel für ein Controller, der exemplarisch Routen für einen API Endpunkt mit CRUD-Funktionalität definiert. Es ist hierbei bereits zu erkennen, dass mit vorhandener Implementierung eine effektive Kapselung zusammengehörender Funktionalitäten samt ihrer Abhängigkeiten schwer zu erreichen ist.
+Die aktuelle Herangehensweise hat im weiteren Verlauf das Problem, dass Controller - die für die Definition der Routen der API Endpunkte, das Zusammentragen von Daten und der Erstellung einer \textit{Response} zuständig sind - schnell unübersichtlich und komplex werden können. Der Quellcode~\ref{code:sample-controller} auf Seite \pageref{code:sample-controller} zeigt ein Beispiel für ein Controller, der exemplarisch Routen für einen API Endpunkt mit CRUD-Funktionalität definiert. Es ist hierbei bereits zu erkennen, dass dieser trotz fehlender Implementierungen und weiterer Funktionen aufgebläht wirkt. Erschwerend kommt hinzu, dass benötigte Abhängigkeiten (dazu zählen beispielsweise Services, Repositories, Entities und DTOs) jeweils so abstrakt wie möglich gehalten werden müssen, damit diese für alle im Controller definierten Abläufe verwendet werden können. Eine effektive Kapselung zusammengehöriger Funktionalitäten, die entsprechend getrennt voneinander austauschbar und mittels Unit Tests testbar sein sollten, ist somit schwer zu erreichen ist.
 
 \begin{listing}[ht]
     \inputminted[fontsize=\footnotesize,linenos,breaklines]{php}{code/current_controller_sample.php}
@@ -202,8 +201,29 @@ Die aktuelle Herangehensweise hat im weiteren Verlauf das Problem, dass Controll
 \clearpage
 
 \section{Anforderungen}
+\label{sec:anforderungen}
+Die in Abschnitt~\ref{sec:problemstellung} angeführten Umstände und den daraus resultierenden Herangehensweisen, die nicht mehr in vollem Maße zufriedenstellend sind, führen zu neuen Anforderungen an das Better Life System. Diese Anforderungen sollen entsprechend umgesetzt werden, um ein zukunftssicheres Backend für die gesamte Anwendung garantieren zu können und die Entwicklung neuer sowie bestehender Funktionalitäten zu erleichtern und zu vereinheitlichen.
+
+\medskip
+
+Zum Start des Berufspraktikums Anfang Juli 2020 stand bereits fest, dass in weiterer Folge das CQRS-Pattern (was für \enquote{Command Query Responsibility Segregation} steht) zum Einsatz kommen wird, da andere Projekte der Fusonic GmbH - die primär auf C\# basieren - bereits gute Erfahrungen damit gemacht haben.
+
+\medskip
+
+Die Anforderungen, die im Zuge des Berufspraktikums und folglich dieser Bachelorarbeit zu erfüllen sind, bestehen darin, das aktuell bestehende System neben dem \enquote{Tagesgeschäft} (sprich Bugfixes, Feature Requests etc.) laufend umzustellen und neue Funktionalitäten entsprechend mit der neuen Struktur und dem Pattern umzusetzen.
 
 \section{Zielsetzung}
+\label{sec:zielsetzung}
+Die in den Abschnitten~\ref{sec:problemstellung} und \ref{sec:anforderungen} angeführten Punkte ergeben folgende Ziele, die im Verlauf des Berufspraktikums so weit wie möglich umzusetzen sind. Aufgrund von Budget- und Zeitlimitierungen findet das, wie im Abschnitt zuvor bereits erwähnt wurde, laufend statt und entspricht keiner Komplettumstellung in einem Zug.
+
+\noindent
+Als Ziele einzustufen sind:
+\begin{itemize}
+    \item Vorbereitung der bestehenden Infrastruktur auf CQRS in Zusammenarbeit mit Mitarbeitern der Fusonic GmbH
+    \item Umstellung der bestehenden API Endpunkte und deren Controller auf CQRS bei Beibehaltung von möglichst viel Programmlogik
+    \item Umsetzung neuer Funktionalitäten mittels CQRS
+    \item Weiterhin Abwickeln des Tagesgeschäftes
+\end{itemize}
 
 \chapter{Stand der Technik}
 \label{chap:stand-technik}
@@ -222,10 +242,10 @@ Formatvorlage für den Fließtext.
 
 \chapter*{Eidesstattliche Erklärung}
 \addcontentsline{toc}{chapter}{Eidesstattliche Erklärung}
-Ich erkläre hiermit an Eides statt, dass ich die vorliegende Masterarbeit selbstständig und ohne Benutzung anderer als der angegebenen Hilfsmittel angefertigt habe. Die aus fremden Quellen direkt oder indirekt übernommenen Stellen sind als solche kenntlich gemacht. Die Arbeit wurde bisher weder in gleicher noch in ähnlicher Form einer anderen Prüfungsbehörde vorgelegt und auch noch nicht veröffentlicht.
+Ich erkläre hiermit an Eides statt, dass ich die vorliegende Bachelorarbeit I selbstständig und ohne Benutzung anderer als der angegebenen Hilfsmittel angefertigt habe. Die aus fremden Quellen direkt oder indirekt übernommenen Stellen sind als solche kenntlich gemacht. Die Arbeit wurde bisher weder in gleicher noch in ähnlicher Form einer anderen Prüfungsbehörde vorgelegt und auch noch nicht veröffentlicht.
 
 \vspace{3cm}
 \noindent
-Dornbirn, am [Tag. Monat Jahr anführen]\hfill [Vor- und Nachname Verfasser/in]
+Dornbirn, am [Tag. Monat Jahr anführen]\hfill Dominic Luidold
 
 \end{document}
