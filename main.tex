@@ -102,6 +102,7 @@ Als nächstes möchte ich meiner gesamten Familie danken, denen ich während des
 
 Zu guter Letzt möchte ich meine Arbeit all jenen widmen, die für die Gleichbehandlung und Gleichberechtigung aller kämpfen, sich für eine Sache einsetzen, die größer als sie selbst ist und für die sie teilweise sogar ihr Leben aufs Spiel setzen. Auch 2020 braucht es weltweit immer noch laute Stimmen - Stimmen, die sich nicht unterkriegen lassen.
 
+\bigskip
 
 \begin{quote}
     \begin{flushright}
@@ -192,15 +193,15 @@ Aufgrund der Anforderungen der Viterma Handels GmbH, dass das Better Life System
 
 Das Backend, welches alle API-Anfragen bearbeitet und als Schnittstelle zur Datenbank dient, ist in der Programmiersprache PHP geschrieben und verwendet das Framework Symfony\footnote{\href{https://symfony.com/}{Symfony (https://symfony.com)}} sowie diverse \enquote{Bundles}, die darauf aufbauen. Ein detaillierterer Überblick über den Aufbau, bisher angewandte Konzepte sowie technische Begebenheiten werden in Kapitel~\ref{chap:stand-technik} auf Seite \pageref{chap:stand-technik} behandelt.
 
-\medbreak
+\medskip
 
 Während die Nutzung des Better Life System auf allen Plattformen - die einen modernen Webbrowser anbieten - möglich ist, findet die Entwicklung primär auf der Linux-Distribution  Ubuntu statt. Der Grund für diese Betriebssystemwahl ist damit zu erklären, dass sowohl die lokale Entwicklung als auch die Continuous Integration Umgebung (genutzt für automatisierte Tests) und das Continuous Deployment mittels Docker\footnote{\href{https://docker.com}{Docker (https://docker.com)}} Containern stattfindet. Für die Entwicklung im Backend-Bereich der Anwendung wird die IDE PhpStorm verwendet, während im Frontend auf Visual Studio Code gesetzt wird.
 
 \section{Problemstellung}
 \label{sec:problemstellung}
-Die Entwicklung des BLS hat im Herbst \colorbox{yellow}{2018} begonnen und die Anwendung ist seit dem stetig weiterentwickelt worden. Über die Zeit haben sich entsprechend sowohl die Anforderungen und Wünsche des Kunden als auch die technischen Begebenheiten, Best Practices und Möglichkeiten verändert.
+Die Entwicklung des BLS hat im Frühjahr 2017 begonnen und die Anwendung ist seit dem stetig weiterentwickelt worden. Über die Zeit haben sich entsprechend sowohl die Anforderungen und Wünsche des Kunden als auch die technischen Begebenheiten, Best Practices und Möglichkeiten verändert.
 
-Die bisher bei der Umsetzung des Projekts verwendete Struktur sowie der Aufbau wurde stark an die empfohlene Herangehensweise von Symfony angelehnt und die Code-Basis entsprechend darauf ausgelegt \parencite[siehe dazu][\enquote{The Symfony Framework Best Practices}]{symfony_symfony_nodate}. Durch wachsende Anforderungen und entsprechend benötigten Programmcode, der diese erfüllt, hat sich jedoch ein komplexes System ergeben, dessen \textit{Controller}, \textit{Entities}, \textit{Services} und \textit{Data Transfer Objects (DTOs)} auf viele Verzeichnisse und Unterverzeichnisse verteilt sind. Die Abbildung~\ref{fig:ordnerstruktur} auf Seite \pageref{fig:ordnerstruktur} zeigt einen Ausschnitt der Ordner, die im Projekt vorkommen und teilweise weitere Ordner mit diversen Klassen, Traits etc. beinhalten.
+Die bisher bei der Umsetzung des Projekts verwendete Struktur sowie der Aufbau wurde stark an die empfohlene Herangehensweise von Symfony angelehnt und die Code-Basis entsprechend darauf ausgelegt \parencite[siehe dazu][\enquote{The Symfony Framework Best Practices}]{symfony_symfony_nodate}. Durch wachsende Anforderungen und entsprechend benötigten Programmcode, der diese erfüllt, hat sich jedoch ein komplexes System ergeben, dessen \textit{Controller}, \textit{Entities}, \textit{Manager (Services)} und \textit{Data Transfer Objects (DTOs)} auf viele Verzeichnisse und Unterverzeichnisse verteilt sind. Die Abbildung~\ref{fig:ordnerstruktur} auf Seite \pageref{fig:ordnerstruktur} zeigt einen Ausschnitt von Ordnern die im Projekt vorkommen und jeweils alle Klassen ihrer Art beinhalten (im Verzeichnis \enquote{Controller} befinden sich, um ein Beispiel zu nennen, alle Controller des Projekts).
 
 \begin{figure}[ht]
     \centering
@@ -209,31 +210,27 @@ Die bisher bei der Umsetzung des Projekts verwendete Struktur sowie der Aufbau w
     \label{fig:ordnerstruktur}
 \end{figure}
 
-\colorbox{yellow}{TODO!} Die aktuelle Herangehensweise hat im weiteren Verlauf das Problem, dass Controller - die für die Definition der Routen der API Endpunkte, das Zusammentragen von Daten und der Erstellung einer \textit{Response} zuständig sind - schnell unübersichtlich und komplex werden können. Der Quellcode~\ref{code:sample-controller} auf Seite \pageref{code:sample-controller} zeigt ein Beispiel für ein Controller, der exemplarisch Routen für einen API Endpunkt mit CRUD-Funktionalität definiert. Es ist hierbei bereits zu erkennen, dass dieser trotz fehlender Implementierungen und weiterer Funktionen aufgebläht wirkt. Erschwerend kommt hinzu, dass benötigte Abhängigkeiten (dazu zählen beispielsweise Services, Repositories, Entities und DTOs) jeweils so abstrakt wie möglich gehalten werden müssen, damit diese für alle im Controller definierten Abläufe verwendet werden können. Eine effektive Kapselung zusammengehöriger Funktionalitäten, die entsprechend getrennt voneinander austauschbar und mittels Unit Tests testbar sein sollten, ist somit schwer zu erreichen ist.
+Durch die bisher gewählte Herangehensweise und den entsprechenden Aufbau hat sich jedoch ergeben, dass eine logische Gruppierung bzw. Kapselung von zusammengehörenden Klassen, Controllern, Managern etc. eines API Endpunkts nur schwer möglich ist. Das hat zur Folge, dass das System an manchen Stellen sehr komplex aufgebaut ist und externe Personen eine gewisse Zeit brauchen, um sich mit internen Abläufen vertraut machen zu können. Neben der Verständlichkeit ist dadurch in weiterer Folge auch die Wartbarkeit und einfache Erweiterbarkeit im Falle von neuen Funktionalitäten nicht im vollen Ausmaß gegeben. Das Testen einzelner Bestandteile mittels sogenannter \textit{Unit Tests} findet im Moment nur an wenigen Stellen statt. Primär wird beim Better Life System auf \textit{Funktionale Tests} gesetzt, die im Problemfall jedoch nur grundsätzlich darauf hindeuten können, wo ein Fehler aufgetreten ist.
 
-\begin{listing}[ht]
-    \inputminted[fontsize=\footnotesize,linenos,breaklines]{php}{code/current_controller_sample.php}
-    \caption{Beispiel Controller mit definierten Routen für CRUD-Funktionalität}
-    \label{code:sample-controller}
-\end{listing}
-
-\clearpage
+Da sich die Anforderungen an das Backend auch in Zukunft noch weiterentwickeln können und eine Skalierung der Infrastruktur beziehungsweise Abspaltung einzelner Teile (in sogenannte Microservices) nicht ausgeschlossen werden kann, bedarf es Möglichkeiten, dies möglichst effektiv und ohne großen, zusätzlichen Aufwand umsetzen zu können. Die von Symfony empfohlene Herangehensweise kann dies dabei nur bedingt unterstützen, was auch in diesem Fall einen limitierenden Faktor darstellt.
 
 \section{Anforderungen}
 \label{sec:anforderungen}
-Die in Abschnitt~\ref{sec:problemstellung} angeführten Umstände und den daraus resultierenden Herangehensweisen, die nicht mehr in vollem Maße zufriedenstellend sind, führen zu neuen Anforderungen an das Better Life System. Diese Anforderungen sollen entsprechend umgesetzt werden, um ein zukunftssicheres Backend für die gesamte Anwendung garantieren zu können und die Entwicklung neuer sowie bestehender Funktionalitäten zu erleichtern und zu vereinheitlichen.
+Die in Abschnitt~\ref{sec:problemstellung} angeführten Umstände und den daraus resultierenden Herangehensweisen, die nicht mehr in vollem Maße zufriedenstellend sind, führen zu neuen Anforderungen an das Better Life System. Diese sollen entsprechend umgesetzt werden, um ein zukunftssicheres Backend für die gesamte Anwendung garantieren zu können und die Entwicklung neuer sowie bestehender Funktionalitäten zu erleichtern und zu vereinheitlichen.
 
 \medskip
 
-Zum Start des Berufspraktikums Anfang Juli 2020 stand bereits fest, dass in weiterer Folge das CQRS-Pattern (was für \enquote{Command Query Responsibility Segregation} steht) zum Einsatz kommen wird, da andere Projekte der Fusonic GmbH - die primär auf C\# basieren - bereits gute Erfahrungen damit gemacht haben.
+Zum Start des Berufspraktikums Anfang Juli 2020 stand bereits fest, dass in weiterer Folge das CQRS-Pattern (was für \textit{Command Query Responsibility Segregation} steht) zum Einsatz kommen wird. Andere Projekte der Fusonic GmbH, die primär auf C\# und .NET basieren, haben bereits gute Erfahrungen damit gemacht und gehen deshalb davon aus, dass der Einsatz Patterns die Qualität der bestehenden Code-Basis verbessern wird.
 
 \medskip
 
-Die Anforderungen, die im Zuge des Berufspraktikums und folglich dieser Bachelorarbeit zu erfüllen sind, bestehen darin, das aktuell bestehende System neben dem \enquote{Tagesgeschäft} (sprich Bugfixes, Feature Requests etc.) laufend umzustellen und neue Funktionalitäten entsprechend mit der neuen Struktur und dem Pattern umzusetzen.
+Die Anforderungen, die im Zuge des Berufspraktikums und folglich dieser Bachelorarbeit zu erfüllen sind, bestehen darin, das aktuell bestehende System, neben dem \enquote{Tagesgeschäft} (sprich Bugfixes, Feature Requests etc.), laufend umzustellen und neue Funktionalitäten entsprechend mit der neuen Struktur und dem Pattern umzusetzen.
 
 \section{Zielsetzung}
 \label{sec:zielsetzung}
-Die in den Abschnitten~\ref{sec:problemstellung} und \ref{sec:anforderungen} angeführten Punkte ergeben folgende Ziele, die im Verlauf des Berufspraktikums so weit wie möglich umzusetzen sind. Aufgrund von Budget- und Zeitlimitierungen findet das, wie im Abschnitt zuvor bereits erwähnt wurde, laufend statt und entspricht keiner Komplettumstellung in einem Zug.
+Die in den Abschnitten~\ref{sec:problemstellung} und \ref{sec:anforderungen} angeführten Punkte ergeben folgende Ziele, die im Verlauf des Berufspraktikums - so weit wie möglich - umzusetzen sind.
+
+\smallskip
 
 \noindent
 Als Ziele einzustufen sind:
