@@ -169,6 +169,8 @@ Um die Lesbarkeit zu gewährleisten und zugunsten der Textökonomie werden die v
  \acro{CQRS}{Command Query Responsibility Segregation}
  \acro{CRUD}{Create, Read, Update, Delete}
  \acro{DTO}{Data Transfer Object}
+ \acro{IDE}{Integrierte Entwicklungsumgebung}
+ \acro{LTS}{Long Term Support}
 \end{acronym}
 
 \chapter{Einleitung}
@@ -243,8 +245,20 @@ Als Ziele einzustufen sind:
 
 \chapter{Stand der Technik}
 \label{chap:stand-technik}
+Das folgende Kapitel gibt einen Überblick über den aktuellen Stand des Backends des Better Life System, dessen technischem Aufbau und dem zugrundeliegenden Konzept. Anschließend wird die von Symfony empfohlene Architektur beleuchtet und auf das zukünftig eingesetzte CQRS-Pattern eingegangen. Am Ende des Kapitels werden die Symfony Standard-Architektur und CQRS gegenübergestellt und Vor- sowie Nachteile aufgezeigt.
 
-\colorbox{yellow}{TODO}
+\section{Aufbau des Backends}
+\label{sec:aufbau-backend}
+Das Backend des BLS basiert auf der Programmiersprache PHP und setzt hierbei auf die zum aktuellen Zeitpunkt (Stand August 2020) neueste Version \textit{PHP 7.4}. Zur Verwaltung benötigter Abhängigkeiten kommt das Paketverwaltungssystem Composer\footnote{\href{https://getcomposer.org}{Composer (https://getcomposer.org)}} zum Einsatz, welches alle benötigten Symfony Bundles und anderweitige Packages sowohl im Produktivsystem als auch während der Entwicklung zur lokalen Installation sowie Nutzung zur Verfügung stellt.
+
+Als Grundgerüst für das Backend dient das PHP-Framework Symfony in der LTS-Version \textit{4.4}, wobei zum Zeitpunkt des Verfassens dieser Arbeit Vorbereitungen für einen Umstieg auf Version \textit{5.x} getroffen werden. Das Backend dient als Schnittstelle zwischen dem Angular-Frontend und einem Datenspeicher, wobei hierfür eine relationale Datenbank auf Basis von MySQL eingesetzt wird.
+
+\medskip
+
+Der grundsätzliche Aufbau des Symfony Backends entspricht aktuell der empfohlenen Vorgehensweise laut Symfony Dokumentation und wird im folgenden Abschnitt~\ref{sec:symfony-aufbau} auf Seite \pageref{chap:stand-technik} erläutert.
+
+\section{Standard Symfony Architektur}
+\label{sec:symfony-aufbau}
 
 % Literaturverzeichnis:
 \clearpage
