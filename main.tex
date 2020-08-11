@@ -166,6 +166,7 @@ Um die Lesbarkeit zu gewährleisten und zugunsten der Textökonomie werden die v
  \acro{BLS}{Better Life System}
  \acro{CI}{Continuous Integration}
  \acro{CD}{Continuous Deployment}
+ \acro{CQS}{Command Query Separation}
  \acro{CQRS}{Command Query Responsibility Segregation}
  \acro{CRUD}{Create, Read, Update, Delete}
  \acro{DTO}{Data Transfer Object}
@@ -212,7 +213,7 @@ Die bisher bei der Umsetzung des Projekts verwendete Struktur sowie der Aufbau w
     \label{fig:ordnerstruktur}
 \end{figure}
 
-Durch die bisher gewählte Herangehensweise und den entsprechenden Aufbau hat sich jedoch ergeben, dass eine logische Gruppierung bzw. Kapselung von zusammengehörenden Klassen, Controllern, Managern etc. eines API Endpunkts nur schwer möglich ist. Das hat zur Folge, dass das System an manchen Stellen sehr komplex aufgebaut ist und externe Personen eine gewisse Zeit brauchen, um sich mit internen Abläufen vertraut machen zu können. Neben der Verständlichkeit ist dadurch in weiterer Folge auch die Wartbarkeit und einfache Erweiterbarkeit im Falle von neuen Funktionalitäten nicht im vollen Ausmaß gegeben. Das Testen einzelner Bestandteile mittels sogenannter \textit{Unit Tests} findet im Moment nur an wenigen Stellen statt. Primär wird beim Better Life System auf \textit{Funktionale Tests} gesetzt, die im Problemfall jedoch nur grundsätzlich darauf hindeuten können, wo ein Fehler aufgetreten ist.
+Durch die bisher gewählte Herangehensweise und den entsprechenden Aufbau hat sich jedoch ergeben, dass eine logische Gruppierung beziehungsweise Kapselung von zusammengehörenden Klassen, Controllern, Managern etc. eines API Endpunkts nur schwer möglich ist. Das hat zur Folge, dass das System an manchen Stellen sehr komplex aufgebaut ist und externe Personen eine gewisse Zeit brauchen, um sich mit internen Abläufen vertraut machen zu können. Neben der Verständlichkeit ist dadurch in weiterer Folge auch die Wartbarkeit und einfache Erweiterbarkeit im Falle von neuen Funktionalitäten nicht im vollen Ausmaß gegeben. Das Testen einzelner Bestandteile mittels sogenannter \textit{Unit Tests} findet im Moment nur an wenigen Stellen statt. Primär wird beim Better Life System auf \textit{Funktionale Tests} gesetzt, die im Problemfall jedoch nur grundsätzlich darauf hindeuten können, wo ein Fehler aufgetreten ist.
 
 Da sich die Anforderungen an das Backend auch in Zukunft noch weiterentwickeln können und eine Skalierung der Infrastruktur beziehungsweise Abspaltung einzelner Teile (in sogenannte Microservices) nicht ausgeschlossen werden kann, bedarf es Möglichkeiten, dies möglichst effektiv und ohne großen, zusätzlichen Aufwand umsetzen zu können. Die von Symfony empfohlene Herangehensweise kann dies dabei nur bedingt unterstützen, was auch in diesem Fall einen limitierenden Faktor darstellt.
 
@@ -251,14 +252,55 @@ Das folgende Kapitel gibt einen Überblick über den aktuellen Stand des Backend
 \label{sec:aufbau-backend}
 Das Backend des BLS basiert auf der Programmiersprache PHP und setzt hierbei auf die zum aktuellen Zeitpunkt (Stand August 2020) neueste Version \textit{PHP 7.4}. Zur Verwaltung benötigter Abhängigkeiten kommt das Paketverwaltungssystem Composer\footnote{\href{https://getcomposer.org}{Composer (https://getcomposer.org)}} zum Einsatz, welches alle benötigten Symfony Bundles und anderweitige Packages sowohl im Produktivsystem als auch während der Entwicklung zur lokalen Installation sowie Nutzung zur Verfügung stellt.
 
-Als Grundgerüst für das Backend dient das PHP-Framework Symfony in der LTS-Version \textit{4.4}, wobei zum Zeitpunkt des Verfassens dieser Arbeit Vorbereitungen für einen Umstieg auf Version \textit{5.x} getroffen werden. Das Backend dient als Schnittstelle zwischen dem Angular-Frontend und einem Datenspeicher, wobei hierfür eine relationale Datenbank auf Basis von MySQL eingesetzt wird.
+Als Grundgerüst für das Backend dient das PHP-Framework Symfony in der LTS-Version \textit{4.4}, wobei zum Zeitpunkt des Verfassens dieser Arbeit Vorbereitungen für einen Umstieg auf Version \textit{5.x} getroffen werden. Das Backend dient als Schnittstelle zwischen dem Angular-Frontend und einem Datenspeicher, wobei hierfür eine relationale Datenbank auf Basis von MySQL eingesetzt wird. Um von Symfony aus auf die Datenbank zugreifen zu können, wird Doctrine\footnote{\href{https://www.doctrine-project.org}{Doctrine (https://www.doctrine-project.org)}} eingesetzt, welches ein objektrelationales Mapping vornimmt und in der Anwendung zur Verfügung stellt.
 
-\medskip
-
-Der grundsätzliche Aufbau des Symfony Backends entspricht aktuell der empfohlenen Vorgehensweise laut Symfony Dokumentation und wird im folgenden Abschnitt~\ref{sec:symfony-aufbau} auf Seite \pageref{chap:stand-technik} erläutert.
+Der grundsätzliche Aufbau des Symfony Backends entspricht aktuell der empfohlenen Vorgehensweise laut Symfony Dokumentation und wird im nachfolgenden Abschnitt~\ref{sec:symfony-aufbau} erläutert.
 
 \section{Standard Symfony Architektur}
 \label{sec:symfony-aufbau}
+
+\colorbox{yellow}{TODO}
+
+\section{CQRS Pattern}
+\label{sec:cqrs-pattern}
+Das Command Query Responsibility Segregation Pattern (nachfolgend CQRS genannt) soll als Grundlage für die zukünftige Struktur des Better Life System dienen. Die Entscheidung für den Wechsel auf dieses Pattern beziehungsweise die zugrundeliegende Architektur basiert primär auf Erfahrungswerten, die Fusonic GmbH bei anderen Projekten sammeln konnte. Der Einsatz dieses Patterns soll die im Kapitel~\ref{chap:einleitung} angesprochenen Problemstellungen in Angriff nehmen und die Komplexität, Verständlichkeit, Testbarkeit und Erweiterbarkeit des Systems langfristig verbessern.
+
+Die bisherigen Erfahrungen, die Fusonic mit dieser Herangehensweise gemacht hat, basieren auf C\# und .NET Core Projekten. Ein entsprechender Einsatz mit der Programmiersprache PHP und dem Framework Symfony wurde bisher nur konzeptionell durchgeplant und findet damit erstmalig Einzug in ein Kundenprojekt.
+
+\subsection{Grundlagen von CQRS}
+\label{sub-sec:cqrs-grundlagen}
+Um über das CQRS-Pattern sprechen zu können, werden einige grundlegende Begrifflichkeiten sowie Konzepte benötigt, die im weiteren Verlauf dessen Ursprung definieren und Verständnis schaffen sollen.
+
+CQRS, beziehungsweise die Terme \textit{Command} und \textit{Query}, beziehen sich auf das Prinzip der \textit{Command Query Separation} (kurz \textit{CQS}). \parencite[Vgl.][]{young_cqrs_2010} CQS definiert auf der einen Seite lesende und auf der anderen Seite schreibende Aktionen in einem System, die voneinander getrennt sind und unterschiedlich agieren sowie verschiedene Resultate als Folge haben:
+
+\begin{itemize}
+    \item Lesende Aktionen, sogenannte \textbf{Queries}, greifen auf Daten in einem System zu und liefern diese bei einem Aufruf als Ergebnis zurück. Durch das Ausführen der Aktion wird der Zustand eines Objekts oder dem System im Ganzen nicht verändert. \parencite[Vgl.][]{fowler_commandqueryseparation_2005}
+    \item Schreibende Aktionen, sogenannte \textbf{Commands}, verändern Daten in einem System, führen jedoch zu keinem Rückgabewert. Durch das Ausführen der Aktion wird der Zustand eines Objekts oder dem System im Ganzen bleibend verändert. \parencite[Vgl.][]{fowler_commandqueryseparation_2005}
+\end{itemize}
+
+\noindent
+Fowler beschreibt den Vorteil dieser Aufteilung damit, dass Methoden, die den Zustand eines Objekts oder Systems verändern, von denen logisch getrennt werden können, die nur lesend darauf zugreifen. Queries können dadurch \enquote{gefahrlos} und in beliebiger Reihenfolge an jeder Stelle in einer Anwendung eingesetzt werden während dies bei Commands nicht gegeben ist. \parencite[Vgl.][]{fowler_commandqueryseparation_2005}
+
+\subsection{Funktionsweise von CQRS}
+\label{sub-sec:cqrs-funktionsweise}
+Die Funktionsweise des CQRS Konzepts basiert, wie im Abschnitt~\ref{sub-sec:cqrs-grundlagen} beschrieben, auf dem Einsatz von Commands und Queries. Durch deren Einsatz wird eine effektive Aufteilung in zwei separate und optimalerweise unabhängige Modelle erzielt, wodurch zum einen ein Fokus auf die jeweilige Verantwortlichkeit des Modells gelegt werden kann und zum anderen die übermäßige Optimierung hin zu einer Datenbank wegfällt. Dadurch rückt die Anwendungs- beziehungsweise Businesslogik deutlich mehr in den Vordergrund und kann entsprechend besser ausgebaut und getestet werden. \parencite[Vgl.][]{heimeshoff_cqrs_2013}
+
+\medskip
+
+Anhand der Abbildung~\ref{fig:cqrs-fowler} auf Seite \pageref{fig:cqrs-fowler} wird verdeutlicht, wie der Ablauf in einem auf CQRS basierenden System abläuft:
+
+\textbf{Ändern von Daten:} Eine vom Benutzer ausgelöste Änderung der Daten (im Falle des BLS durch eine Aktion im Angular-Frontend) führt dazu, dass diese an ein Command Model (oftmals vergleichbar mit einem Domänenmodell auf Basis des Domain-Driven Designs \parencite[vgl.][]{heimeshoff_cqrs_2013}) weitergeleitet wird. Dieses beinhaltet domänenspezifische Logik, Validierung und gegebenenfalls weitere benötigte Funktionalitäten. Das Command Model, dass die Integrität der eingehenden Daten sichergestellt hat, persistiert diese abschließend in der Datenbank und schließt die Aktion (den Command) somit ohne Rückgabewert ab. \parencite[Vgl.][]{fowler_cqrs_2011}
+
+\textbf{Abfragen von Daten:} Ein Abfragen der Daten (ebenfalls durch das Frontend ausgelöst) führt dazu, dass diese von der Datenbank geladen und mittels des (in manchen Fällen auch mehrer) Query Models im entsprechenden Format serialisert werden. Das Query Model schließt die Aktion damit ab, dass die serialisierten Daten nach außen als Rückgabewert(e) weitergegeben werden. \parencite[Vgl.][]{heimeshoff_cqrs_2013}
+
+\vspace{0.5cm}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.6]{images/cqrs_fowler.png}
+    \caption[Schematischer Aufbau eines auf CQRS basierenden Systems]{Schematischer Aufbau eines auf CQRS basierenden Systems.\\Quelle: \cite{fowler_cqrs_2011}}
+    \label{fig:cqrs-fowler}
+\end{figure}
 
 % Literaturverzeichnis:
 \clearpage
