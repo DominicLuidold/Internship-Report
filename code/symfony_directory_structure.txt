@@ -1,0 +1,25 @@
+project/
+   bin/
+      console
+   config/
+      packages/
+      services.yaml
+   public/
+      build/
+      index.php
+   src/
+      Command/
+      Controller/
+      DataFixtures/
+      Entity/
+      EventSubscriber/
+      Form/
+      Migrations/
+      Repository/
+      Security/
+      Twig/
+   tests/
+   var/
+      cache/
+      log/
+   vendor/ 
