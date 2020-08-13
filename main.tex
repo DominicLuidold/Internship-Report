@@ -198,7 +198,7 @@ Aufgrund der Anforderungen der Viterma Handels GmbH, dass das Better Life System
 
 \pagebreak
 
-Das Backend, welches alle API-Anfragen bearbeitet und als Schnittstelle zur Datenbank dient, ist in der Programmiersprache PHP geschrieben und verwendet das Framework Symfony\footnote{\href{https://symfony.com/}{Symfony (https://symfony.com)}} sowie diverse \enquote{Bundles}, die darauf aufbauen. Ein detaillierterer Überblick über den Aufbau, bisher angewandte Konzepte sowie technische Begebenheiten werden in Kapitel~\ref{chap:stand-technik} auf Seite \pageref{chap:stand-technik} behandelt.
+Das Backend, welches alle API-Anfragen bearbeitet und als Schnittstelle zur Datenbank dient, ist in der Programmiersprache PHP geschrieben und verwendet das Framework Symfony\footnote{\href{https://symfony.com/}{Symfony (https://symfony.com)}} sowie diverse \enquote{Bundles}, die darauf aufbauen. Ein detaillierterer Überblick über den Aufbau, bisher angewandte Konzepte sowie technische Begebenheiten werden in Kapitel~\ref{chap:stand-technik} ab Seite \pageref{chap:stand-technik} behandelt.
 
 \medskip
 
@@ -208,7 +208,7 @@ Während die Nutzung des Better Life System auf allen Plattformen - die einen mo
 \label{sec:problemstellung}
 Die Entwicklung des BLS hat im Frühjahr 2017 begonnen und die Anwendung ist seit dem stetig weiterentwickelt worden. Über die Zeit haben sich entsprechend sowohl die Anforderungen und Wünsche des Kunden als auch die technischen Begebenheiten, Best Practices und Möglichkeiten verändert.
 
-Die bisher bei der Umsetzung des Projekts verwendete Struktur sowie der Aufbau wurde stark an die empfohlene Herangehensweise von Symfony angelehnt und die Code-Basis entsprechend darauf ausgelegt \parencite[siehe dazu][\enquote{The Symfony Framework Best Practices}]{symfony_symfony_2020}. Durch wachsende Anforderungen und entsprechend benötigten Programmcode, der diese erfüllt, hat sich jedoch ein komplexes System ergeben, dessen \textit{Controller}, \textit{Entities}, \textit{Manager (Services)} und \textit{Data Transfer Objects (DTOs)} auf viele Verzeichnisse und Unterverzeichnisse verteilt sind. Die Abbildung~\ref{fig:ordnerstruktur} auf Seite \pageref{fig:ordnerstruktur} zeigt einen Ausschnitt von Ordnern die im Projekt vorkommen und jeweils alle Klassen ihrer Art beinhalten (im Verzeichnis \enquote{Controller} befinden sich, um ein Beispiel zu nennen, alle Controller des Projekts).
+Die bisher bei der Umsetzung des Projekts verwendete Struktur sowie der Aufbau wurde stark an die empfohlene Herangehensweise von Symfony angelehnt und die Code-Basis entsprechend darauf ausgelegt \parencite[siehe dazu][\enquote{Use the Default Directory Structure}]{symfony_symfony_2020}. Durch wachsende Anforderungen und entsprechend benötigten Programmcode, der diese erfüllt, hat sich jedoch ein komplexes System ergeben, dessen \textit{Controller}, \textit{Entities}, \textit{Manager (Services)} und \textit{Data Transfer Objects (DTOs)} auf viele Verzeichnisse und Unterverzeichnisse verteilt sind. Die Abbildung~\ref{fig:ordnerstruktur} auf Seite \pageref{fig:ordnerstruktur} zeigt einen Ausschnitt von Ordnern die im Projekt vorkommen und jeweils alle Klassen ihrer Art beinhalten (im Verzeichnis \enquote{Controller} befinden sich, um ein Beispiel zu nennen, alle Controller des Projekts).
 
 \begin{figure}[ht]
     \centering
@@ -217,7 +217,7 @@ Die bisher bei der Umsetzung des Projekts verwendete Struktur sowie der Aufbau w
     \label{fig:ordnerstruktur}
 \end{figure}
 
-Durch die bisher gewählte Herangehensweise und den entsprechenden Aufbau hat sich jedoch ergeben, dass eine logische Gruppierung beziehungsweise Kapselung von zusammengehörenden Klassen, Controllern, Managern etc. eines API Endpunkts nur schwer möglich ist. Das hat zur Folge, dass das System an manchen Stellen sehr komplex aufgebaut ist und externe Personen eine gewisse Zeit brauchen, um sich mit internen Abläufen vertraut machen zu können. Neben der Verständlichkeit ist dadurch in weiterer Folge auch die Wartbarkeit und einfache Erweiterbarkeit im Falle von neuen Funktionalitäten nicht im vollen Ausmaß gegeben. Das Testen einzelner Bestandteile mittels sogenannter \textit{Unit Tests} findet im Moment nur an wenigen Stellen statt. Primär wird beim Better Life System auf \textit{Funktionale Tests} gesetzt, die im Problemfall jedoch nur grundsätzlich darauf hindeuten können, wo ein Fehler aufgetreten ist.
+Durch die bisher gewählte Herangehensweise und den entsprechenden Aufbau hat sich jedoch ergeben, dass eine logische Gruppierung beziehungsweise Kapselung von zusammengehörenden Klassen, Controllern, Managern etc. eines API Endpunkts nur schwer möglich ist. Das hat zur Folge, dass das System an manchen Stellen sehr komplex aufgebaut ist und externe Personen eine gewisse Zeit brauchen, um sich mit internen Abläufen vertraut machen zu können. Neben der Verständlichkeit ist dadurch in weiterer Folge auch die Wartbarkeit und einfache Erweiterbarkeit im Falle von neuen Funktionalitäten nicht im vollen Ausmaß gegeben. Das Testen einzelner Bestandteile mittels sogenannter \textit{Unit Tests} findet im Moment nur an wenigen Stellen statt. Primär wird beim Better Life System auf \textit{Integration Tests} gesetzt, die im Problemfall jedoch nur grundsätzlich darauf hindeuten können, wo ein Fehler aufgetreten ist.
 
 Da sich die Anforderungen an das Backend auch in Zukunft noch weiterentwickeln können und eine Skalierung der Infrastruktur beziehungsweise Abspaltung einzelner Teile (in sogenannte Microservices) nicht ausgeschlossen werden kann, bedarf es Möglichkeiten, dies möglichst effektiv und ohne großen, zusätzlichen Aufwand umsetzen zu können. Die von Symfony empfohlene Herangehensweise kann dies dabei nur bedingt unterstützen, was auch in diesem Fall einen limitierenden Faktor darstellt.
 
@@ -271,7 +271,7 @@ Symfony selbst gibt in der eigenen Dokumentation keine verpflichtenden Vorgaben 
 
 \begin{itemize}
     \item \textbf{Model:} Dem Model entsprechen die im \textit{Entity}-Verzeichnis abgelegten Klassen. Diese beinhalten das objektrelationale Mapping und können zusätzliche, domänenspezifische Funktionalitäten zur Verfügung stellen. Die Klassen, die im \textit{Repository}-Verzeichnis zu finden sind, stellen den Zugriff auf die Datenbank her und befüllen die Entities bzw. Models mit Daten. \parencite[Vgl.][]{tutorials_point_i_pvt_ltd_symfony_nodate}
-    \item \textbf{View:} Im Falle der hier angenommenen Standard Struktur, wir der View-Teil mittels der Template Engine \textit{Twig} im gleichnamigen Verzeichnis abgehandelt. Im Falle des BLS ist dies mittels Data Transfer Objects gelöst, die bei den jeweiligen API Endpunkten als  serialisierte JSON-Response zurückgegeben werden. \parencite[Vgl.][]{tutorials_point_i_pvt_ltd_symfony_nodate}
+    \item \textbf{View:} Im Falle der hier angenommenen Standardstruktur, wird der View-Teil mittels der Template Engine \textit{Twig} im gleichnamigen Verzeichnis abgehandelt. Im Falle des BLS ist dies mittels Data Transfer Objects gelöst, die bei den jeweiligen API Endpunkten als  serialisierte JSON-Response zurückgegeben werden. \parencite[Vgl.][]{tutorials_point_i_pvt_ltd_symfony_nodate}
     \item \textbf{Controller:} Die von der Namensgebung her am leichtesten zu erkennende Ähnlichkeit stellt das \textit{Controller}-Verzeichnis dar. Die darin vorhandenen Klassen werden verwendet, um eingehende Requests zu mappen. Diese Controller-Klassen sollten jedoch nur wenige Zeilen Code beinhalten, um Berechtigungen zu überprüfen sowie die Response zu erstellen. Die tatsächliche Businesslogik wird in separate Klassen aufgeteilt, die vom Controller aufgerufen werden, um diese möglichst zu entkoppeln. \parencite[Vgl.][]{symfony_symfony_2020} Beim BLS liegt die Anwendungslogik beispielsweise in einem \textit{Manager}-Verzeichnis.
 \end{itemize}
 
@@ -283,15 +283,15 @@ Symfony selbst gibt in der eigenen Dokumentation keine verpflichtenden Vorgaben 
 
 \subsection{Funktionsweise}
 \label{sub-sec:standard-funktionsweise}
-Die Funktionsweise der von Symfony vorgeschlagenen Architektur kann, unter Bezugnahme auf die in Abschnitt~\ref{sub-sec:empfohlener-ansatz} beschriebenen Prinzipien, mit der Abbildung~\ref{fig:single-model-fowler} genauer beleuchtet werden:
+Die Funktionsweise der von Symfony vorgeschlagenen Architektur kann, unter Bezugnahme auf die in Abschnitt~\ref{sub-sec:empfohlener-ansatz} beschriebenen Prinzipien, mithilfe der Abbildung~\ref{fig:single-model-fowler} genauer beleuchtet werden.
 
-Im Zuge der Entwicklung einer API wird oftmals auf CRUD beziehungsweise einen CRUD-ähnlichen Aufbau gesetzt. Die Nutzung eines einzelnen Models oder DTOs sowie der dazugehörenden Businesslogik fällt dabei für die vier Anwendungsfälle \textit{Create}, \textit{Read}, \textit{Update}, \textit{Delete} meistens relativ leicht. Auch bei weiterführenden Nutzungsfällen, bei denen beispielsweise mehrere Models zusammengeführt und entsprechend validiert werden müssen, wird die bestehende Logik hergenommen und keine spezifische Auftrennung von ausgeführten Aktionen vorgenommen. Dadurch entsteht eine Vermischung von lesenden und schreibenden Zugriffen in der Anwendungslogik und den Funktionalitäten des Models, was das System undurchsichtiger und stellenweise komplizierter macht. \parencite[Vgl.][]{fowler_cqrs_2011}
+\smallskip
 
-\vspace{0.5cm}
+Im Zuge der Entwicklung einer Webapplikation mit entsprechendem Backend oder einer API  wird oftmals auf CRUD beziehungsweise einen CRUD-ähnlichen Aufbau gesetzt. Die Nutzung eines einzelnen Models, dem jeweiligen DTO (sofern vorhanden) sowie der dazugehörenden Businesslogik ist dabei ein einfacher Weg, um schnell und anfangs unkompliziert Funktionalitäten für die CRUD Anwendungsfälle umsetzen zu können. Auch bei weiterführenden Nutzungsfällen, bei denen beispielsweise mehrere Models zusammengeführt und entsprechend validiert werden müssen, wird die bestehende Logik herangezogen und keine spezifische Auftrennung von ausgeführten Aktionen vorgenommen. Dadurch entsteht jedoch eine Vermischung von lesenden und schreibenden Zugriffen in der Anwendungslogik sowie der Funktionalitäten der entsprechenden Models. \parencite[Vgl.][]{fowler_cqrs_2011} Die Abbildung stellt diesen Umstand anschaulich im hellgrau hinterlegten Rechteck \enquote{Application} dar:
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[scale=0.6]{images/fowler_single_model.png}
+    \includegraphics[scale=0.55]{images/fowler_single_model.png}
     \caption[Aufbau einer gängigen Schichtenarchitektur]{Aufbau einer gängigen Schichtenarchitektur.\\Quelle: \cite{fowler_cqrs_2011}}
     \label{fig:single-model-fowler}
 \end{figure}
@@ -326,7 +326,7 @@ Anhand der Abbildung~\ref{fig:cqrs-fowler} auf Seite \pageref{fig:cqrs-fowler} w
 
 \textbf{Ändern von Daten:} Eine vom Benutzer ausgelöste Änderung der Daten (im Falle des BLS durch eine Aktion im Angular-Frontend) führt dazu, dass diese an ein Command Model (oftmals vergleichbar mit einem Domänenmodell auf Basis des Domain-Driven Designs \parencite[vgl.][]{heimeshoff_cqrs_2013}) weitergeleitet wird. Dieses beinhaltet domänenspezifische Logik, Validierung und gegebenenfalls weitere benötigte Funktionalitäten. Das Command Model, dass die Integrität der eingehenden Daten sichergestellt hat, persistiert diese abschließend in der Datenbank und schließt die Aktion (den Command) somit ohne Rückgabewert ab. \parencite[Vgl.][]{fowler_cqrs_2011}
 
-\textbf{Abfragen von Daten:} Ein Abfragen der Daten (ebenfalls durch das Frontend ausgelöst) führt dazu, dass diese von der Datenbank geladen und mittels des (in manchen Fällen auch mehrer) Query Models im entsprechenden Format serialisert werden. Das Query Model schließt die Aktion damit ab, dass die serialisierten Daten nach außen als Rückgabewert(e) weitergegeben werden. \parencite[Vgl.][]{heimeshoff_cqrs_2013}
+\textbf{Abfragen von Daten:} Ein Abfragen der Daten (ebenfalls durch das Frontend ausgelöst) führt dazu, dass diese von der Datenbank geladen und mittels des Query Models (in manchen Fällen auch mehrer) im entsprechenden Format serialisert werden. Das Query Model schließt die Aktion damit ab, dass die serialisierten Daten nach außen als Rückgabewert(e) zurückgegeben werden. \parencite[Vgl.][]{heimeshoff_cqrs_2013}
 
 \vspace{0.5cm}
 
@@ -336,6 +336,11 @@ Anhand der Abbildung~\ref{fig:cqrs-fowler} auf Seite \pageref{fig:cqrs-fowler} w
     \caption[Schematischer Aufbau eines auf CQRS basierenden Systems]{Schematischer Aufbau eines auf CQRS basierenden Systems.\\Quelle: \cite{fowler_cqrs_2011}}
     \label{fig:cqrs-fowler}
 \end{figure}
+
+\section{Vergleich Schichtenarchitektur und CQRS}
+\label{sec:vergleich-schichten-cqrs}
+
+\colorbox{yellow}{TODO}
 
 % Literaturverzeichnis:
 \clearpage
