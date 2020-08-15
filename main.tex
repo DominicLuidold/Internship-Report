@@ -53,7 +53,7 @@ Veröffentlichung, Vervielfältigung und Einsichtnahme sind ohne ausdrückliche 
 
 % Titelblatt:
 % \newpage\mbox{}\newpage
-\cleardoublepage   % force output to a right page
+\cleardoublepage % force output to a right page
 \thispagestyle{empty}
 \begin{titlepage}
     \begin{flushright}
@@ -186,7 +186,7 @@ Das Better Life System - welches von Fusonic GmbH entwickelt wird und mittels ei
 
 \section{Arbeitgeber Fusonic GmbH}
 \label{sec:arbeitgeber}
-Die Fusonic GmbH hat ihren Firmensitz in Götzis, Vorarlberg, und besteht aus einem Team von aktuell mehr als 25 Angestellten, Softwareentwicklerinnen und Projektleiterinnen. Diese sind aufgeteilt in diverse kleinere Teams, die intern unter anderem \enquote{Duck-Team} beziehungsweise \enquote{Parrot-Team} genannt werden. Die Teams arbeiten dabei an jeweils eigenständigen Projekten und setzen diverse Technologien ein. Zu den verwendeten Technologien gehören unter anderem C\# mit .NET, PHP mit Symfony und JavaScript/TypeScript mit Angular \parencite[vgl.]["Übersicht aller Technologien"]{fusonic_gmbh_web_2020}. Während es  regelmäßigen Austausch unter den Teams gibt, besteht jedes aus Frontend- sowie Backend-Entwicklern, da die meisten Projekte - aufgrund der zugrundeliegenden Anwendungsfälle - aus einem Web-Frontend sowie serverseitigen Backend bestehen.
+Die Fusonic GmbH hat ihren Firmensitz in Götzis, Vorarlberg, und besteht aus einem Team von aktuell mehr als 25 Angestellten, Softwareentwicklerinnen und Projektleiterinnen. Diese sind aufgeteilt in diverse kleinere Teams, die intern unter anderem \enquote{Duck-Team} beziehungsweise \enquote{Parrot-Team} genannt werden. Die Teams arbeiten dabei an jeweils eigenständigen Projekten und setzen diverse Technologien ein. Zu den verwendeten Technologien gehören unter anderem C\# mit .NET, PHP mit Symfony und JavaScript/TypeScript mit Angular \parencite[vgl.]["Übersicht aller Technologien"]{fusonic_gmbh_web_2020}. Während es regelmäßigen Austausch unter den Teams gibt, besteht jedes aus Frontend- sowie Backend-Entwicklern, da die meisten Projekte - aufgrund der zugrundeliegenden Anwendungsfälle - aus einem Web-Frontend sowie serverseitigen Backend bestehen.
 
 \section{Nutzung \& Umfeld des \enquote{Better Life System}}
 \label{sec:nutzung-umfeld}
@@ -202,7 +202,7 @@ Das Backend, welches alle API-Anfragen bearbeitet und als Schnittstelle zur Date
 
 \medskip
 
-Während die Nutzung des Better Life System auf allen Plattformen - die einen modernen Webbrowser anbieten - möglich ist, findet die Entwicklung primär auf der Linux-Distribution  Ubuntu statt. Der Grund für diese Betriebssystemwahl ist damit zu erklären, dass sowohl die lokale Entwicklung als auch die Continuous Integration Umgebung (genutzt für automatisierte Tests) und das Continuous Deployment mittels Docker\footnote{\href{https://docker.com}{Docker (https://docker.com)}} Containern stattfindet. Für die Entwicklung im Backend-Bereich der Anwendung wird die IDE PhpStorm verwendet, während im Frontend auf Visual Studio Code gesetzt wird.
+Während die Nutzung des Better Life System auf allen Plattformen - die einen modernen Webbrowser anbieten - möglich ist, findet die Entwicklung primär auf der Linux-Distribution Ubuntu statt. Der Grund für diese Betriebssystemwahl ist damit zu erklären, dass sowohl die lokale Entwicklung als auch die Continuous Integration Umgebung (genutzt für automatisierte Tests) und das Continuous Deployment mittels Docker\footnote{\href{https://docker.com}{Docker (https://docker.com)}} Containern stattfindet. Für die Entwicklung im Backend-Bereich der Anwendung wird die IDE PhpStorm verwendet, während im Frontend auf Visual Studio Code gesetzt wird.
 
 \section{Problemstellung}
 \label{sec:problemstellung}
@@ -271,7 +271,7 @@ Symfony selbst gibt in der eigenen Dokumentation keine verpflichtenden Vorgaben 
 
 \begin{itemize}
     \item \textbf{Model:} Dem Model entsprechen die im \textit{Entity}-Verzeichnis abgelegten Klassen. Diese beinhalten das objektrelationale Mapping und können zusätzliche, domänenspezifische Funktionalitäten zur Verfügung stellen. Die Klassen, die im \textit{Repository}-Verzeichnis zu finden sind, stellen den Zugriff auf die Datenbank her und befüllen die Entities beziehungsweise Models mit Daten. \parencite[Vgl.][]{tutorials_point_i_pvt_ltd_symfony_nodate}
-    \item \textbf{View:} Im Falle der hier angenommenen Standardstruktur, wird der View-Teil mittels der Template Engine \textit{Twig} im gleichnamigen Verzeichnis abgehandelt. Im Falle des BLS ist dies mittels Data Transfer Objects gelöst, die bei den jeweiligen API Endpunkten als  serialisierte JSON-Response zurückgegeben werden. \parencite[Vgl.][]{tutorials_point_i_pvt_ltd_symfony_nodate}
+    \item \textbf{View:} Im Falle der hier angenommenen Standardstruktur, wird der View-Teil mittels der Template Engine \textit{Twig} im gleichnamigen Verzeichnis abgehandelt. Im Falle des BLS ist dies mittels Data Transfer Objects gelöst, die bei den jeweiligen API Endpunkten als serialisierte JSON-Response zurückgegeben werden. \parencite[Vgl.][]{tutorials_point_i_pvt_ltd_symfony_nodate}
     \item \textbf{Controller:} Die von der Namensgebung her am leichtesten zu erkennende Ähnlichkeit stellt das \textit{Controller}-Verzeichnis dar. Die darin vorhandenen Klassen werden verwendet, um eingehende Requests zu mappen. Diese Controller-Klassen sollten jedoch nur wenige Zeilen Code beinhalten, um Berechtigungen zu überprüfen sowie die Response zu erstellen. Die tatsächliche Businesslogik wird in separate Klassen aufgeteilt, die vom Controller aufgerufen werden, um diese möglichst zu entkoppeln. \parencite[Vgl.][]{symfony_symfony_2020} Beim BLS liegt die Anwendungslogik beispielsweise in einem \textit{Manager}-Verzeichnis.
 \end{itemize}
 
@@ -287,7 +287,7 @@ Die Funktionsweise der von Symfony vorgeschlagenen Architektur kann, unter Bezug
 
 \smallskip
 
-Im Zuge der Entwicklung einer Webapplikation mit entsprechendem Backend oder einer API  wird oftmals auf CRUD beziehungsweise einen CRUD-ähnlichen Aufbau gesetzt. Die Nutzung eines einzelnen Models, dem jeweiligen DTO (sofern vorhanden) sowie der dazugehörenden Businesslogik ist dabei ein einfacher Weg, um schnell und anfangs unkompliziert Funktionalitäten für die CRUD Anwendungsfälle umsetzen zu können. Auch bei weiterführenden Nutzungsfällen, bei denen beispielsweise mehrere Models zusammengeführt und entsprechend validiert werden müssen, wird die bestehende Logik herangezogen und keine spezifische Auftrennung von ausgeführten Aktionen vorgenommen. Dadurch entsteht jedoch eine Vermischung von lesenden und schreibenden Zugriffen in der Anwendungslogik sowie der Funktionalitäten der entsprechenden Models. \parencite[Vgl.][]{fowler_cqrs_2011} Die Abbildung stellt diesen Umstand anschaulich im hellgrau hinterlegten Rechteck \enquote{Application} dar:
+Im Zuge der Entwicklung einer Webapplikation mit entsprechendem Backend oder einer API wird oftmals auf CRUD beziehungsweise einen CRUD-ähnlichen Aufbau gesetzt. Die Nutzung eines einzelnen Models, dem jeweiligen DTO (sofern vorhanden) sowie der dazugehörenden Businesslogik ist dabei ein einfacher Weg, um schnell und anfangs unkompliziert Funktionalitäten für die CRUD Anwendungsfälle umsetzen zu können. Auch bei weiterführenden Nutzungsfällen, bei denen beispielsweise mehrere Models zusammengeführt und entsprechend validiert werden müssen, wird die bestehende Logik herangezogen und keine spezifische Auftrennung von ausgeführten Aktionen vorgenommen. Dadurch entsteht jedoch eine Vermischung von lesenden und schreibenden Zugriffen in der Anwendungslogik sowie der Funktionalitäten der entsprechenden Models. \parencite[Vgl.][]{fowler_cqrs_2011} Die Abbildung~\ref{fig:single-model-fowler} stellt diesen Umstand anschaulich im hellgrau hinterlegten Rechteck \enquote{Application} dar:
 
 \begin{figure}[ht]
     \centering
@@ -324,9 +324,9 @@ Die Funktionsweise des CQRS Konzepts basiert, wie im Abschnitt~\ref{sub-sec:cqrs
 
 Anhand der Abbildung~\ref{fig:cqrs-fowler} auf Seite \pageref{fig:cqrs-fowler} wird verdeutlicht, wie der Ablauf in einem auf CQRS basierenden System abläuft:
 
-\textbf{Ändern von Daten:} Eine vom Benutzer ausgelöste Änderung der Daten (im Falle des BLS durch eine Aktion im Angular-Frontend) führt dazu, dass diese an ein Command Model weitergeleitet werden. Das Model beinhaltet die Daten, die abgeändert und persistiert werden sollen und stellt diese gegebenenfalls einem Domänenmodell mit entsprechenden Funktionalitäten, auf Basis des Domain-Driven Designs, zur Verfügung \parencite[vgl.][]{heimeshoff_cqrs_2013}. Das Command Model, dass die Integrität der eingehenden Daten sichergestellt hat, wird abschließend in der Datenbank persistiert, womit die Aktion somit - im Regelfall ohne Rückgabewert - abgeschlossen wird. \parencite[Vgl.][]{fowler_cqrs_2011}
+\textbf{Ändern von Daten:} Eine vom Benutzer ausgelöste Änderung der Daten (im Falle des BLS durch eine Aktion im Angular-Frontend) führt dazu, dass diese an ein Command Model weitergeleitet werden. Das Model beinhaltet die Daten, die abgeändert und persistiert werden sollen und stellt diese gegebenenfalls einem Domänenmodell mit entsprechenden Funktionalitäten - auf Basis des Domain-Driven Designs - zur Verfügung \parencite[vgl.][]{heimeshoff_cqrs_2013}. Das Command Model, dass die Integrität der eingehenden Daten sichergestellt hat, wird abschließend in der Datenbank persistiert, womit die Aktion somit - im Regelfall ohne Rückgabewert - abgeschlossen wird. \parencite[Vgl.][]{fowler_cqrs_2011}
 
-\textbf{Abfragen von Daten:} Ein Abfragen der Daten (ebenfalls durch das Frontend ausgelöst) führt dazu, dass diese von der Datenbank geladen und mittels des Query Models (in manchen Fällen auch mehrerer) im entsprechenden Format geladen werden. Die Aktion wird damit abgeschlossen, dass die Daten nach außen als Rückgabewert(e) zurückgegeben oder auch dargestellt werden. \parencite[Vgl.][]{fowler_cqrs_2011}
+\textbf{Abfragen von Daten:} Ein Abfragen der Daten (ebenfalls durch das Frontend ausgelöst) führt dazu, dass diese von der Datenbank geladen und mittels des Query Models (in manchen Fällen auch mehrerer) im entsprechenden Format serialisiert werden. Die Aktion wird damit abgeschlossen, dass die Daten nach außen als Rückgabewert(e) zurückgegeben oder dargestellt werden. \parencite[Vgl.][]{fowler_cqrs_2011}
 
 \vspace{0.5cm}
 
@@ -355,7 +355,7 @@ Neben den Vorteilen, die CQRS mit sich bringt, gibt es jedoch auch Nachteile geg
 
 Für Anwendungen oder APIs, die lediglich einfache \textit{Create}, \textit{Read}, \textit{Update} und \textit{Delete} Funktionalitäten benötigen, stellt die Implementierung von CQRS einen Mehraufwand dar, der womöglich nicht gerechtfertigt ist. Das Pattern bringt zwar die in Abschnitt~\ref{sub-sec:cqrs-vorteile} genannten Vorteile mit sich, die Komplexität des Systems steigt dadurch aber gleichzeitig an und eignet sich daher nicht für alle Anwendungsfälle, oder zumindest nicht für eine Implementierung im gesamten System. \parencite[Vgl.][Seite 241]{ingeno_software_2018}
 
-Der Vorteil der Auftrennung in Commands und Queries und einhergehenden, getrennten Datenbanken für zu einer weiteren Herausforderung, da sichergestellt werden muss, dass diese untereinander konsistent gehalten werden, um nicht unbeabsichtigt mit veralteten Daten zu arbeiten. \parencite[Vgl.][Seite 241]{ingeno_software_2018}
+Der Vorteil der Auftrennung in Commands und Queries und damit einhergehenden getrennten Datenbanken führt zu einer weiteren Herausforderung, da sichergestellt werden muss, dass diese untereinander konsistent gehalten werden, um nicht unbeabsichtigt mit veralteten Daten zu arbeiten. \parencite[Vgl.][Seite 241]{ingeno_software_2018}
 
 Heimeshoff und Jander beschreiben weiters den Umstand, dass der Planungs- und Konzeptionsaufwand durch den Einsatz von CQRS bei kleineren Anwendungen nicht direkt im Verhältnis zur Implementierung steht. Die Verlagerung des Fokus muss jedoch nicht unbedingt als ein direkter Nachteil gesehen werden, darf laut ihnen dabei aber nicht außer Acht gelassen werden. \parencite[Vgl.][]{heimeshoff_cqrs_2013}
 
@@ -367,8 +367,8 @@ Auch Fowler rät von einem unbedachten Einsatz des Patterns ab und betont, dass 
 \addcontentsline{toc}{chapter}{Literaturverzeichnis}
 \printbibliography
 
-\chapter*{[evtl. Anhang]}  % evtl. ersetzen mit \chapter*{Anhang}
-\addcontentsline{toc}{chapter}{[evtl. Anhang]}   % evtl. ersetzen mit \addcontentsline{toc}{chapter}{Anhang}
+\chapter*{[evtl. Anhang]} % evtl. ersetzen mit \chapter*{Anhang}
+\addcontentsline{toc}{chapter}{[evtl. Anhang]} % evtl. ersetzen mit \addcontentsline{toc}{chapter}{Anhang}
 Formatvorlage für den Fließtext.
 
 \chapter*{Eidesstattliche Erklärung}
