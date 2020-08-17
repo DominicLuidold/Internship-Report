@@ -150,16 +150,6 @@ Um die Lesbarkeit zu gewährleisten und zugunsten der Textökonomie werden die v
 \addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
 \listoffigures
 
-\clearpage
-\phantomsection
-\addcontentsline{toc}{chapter}{Quellcodeverzeichnis}
-\listoflistings
-
-\clearpage
-\phantomsection
-\addcontentsline{toc}{chapter}{Tabellenverzeichnis}
-\listoftables
-
 % Abkürzungsverzeichnis:
 \clearpage
 \phantomsection
@@ -186,7 +176,7 @@ Das Better Life System - welches von Fusonic GmbH entwickelt wird und mittels ei
 
 \section{Arbeitgeber Fusonic GmbH}
 \label{sec:arbeitgeber}
-Die Fusonic GmbH hat ihren Firmensitz in Götzis, Vorarlberg, und besteht aus einem Team von aktuell mehr als 25 Angestellten, Softwareentwicklerinnen und Projektleiterinnen. Diese sind aufgeteilt in diverse kleinere Teams, die intern unter anderem \enquote{Duck-Team} beziehungsweise \enquote{Parrot-Team} genannt werden. Die Teams arbeiten dabei an jeweils eigenständigen Projekten und setzen diverse Technologien ein. Zu den verwendeten Technologien gehören unter anderem C\# mit .NET, PHP mit Symfony und JavaScript/TypeScript mit Angular \parencite[vgl.]["Übersicht aller Technologien"]{fusonic_gmbh_web_2020}. Während es regelmäßigen Austausch unter den Teams gibt, besteht jedes aus Frontend- sowie Backend-Entwicklern, da die meisten Projekte - aufgrund der zugrundeliegenden Anwendungsfälle - aus einem Web-Frontend sowie serverseitigen Backend bestehen.
+Die Fusonic GmbH hat ihren Firmensitz in Götzis, Vorarlberg, und besteht aus einem Team von aktuell mehr als 25 Angestellten, Softwareentwicklerinnen und Projektleiterinnen. Diese sind aufgeteilt in diverse kleinere Teams, die intern unter anderem \enquote{Duck-Team} beziehungsweise \enquote{Parrot-Team} genannt werden. Die Teams arbeiten dabei an jeweils eigenständigen Projekten und setzen diverse Technologien ein. Zu den verwendeten Technologien gehören unter anderem C\# mit .NET, PHP mit Symfony und JavaScript/TypeScript mit Angular \parencite[]["Übersicht aller Technologien"]{fusonic_gmbh_web_2020}. Während es regelmäßigen Austausch unter den Teams gibt, besteht jedes aus Frontend- sowie Backend-Entwicklern, da die meisten Projekte - aufgrund der zugrundeliegenden Anwendungsfälle - aus einem Web-Frontend sowie serverseitigen Backend bestehen.
 
 \section{Nutzung \& Umfeld des \enquote{Better Life System}}
 \label{sec:nutzung-umfeld}
@@ -263,16 +253,16 @@ Der grundsätzliche Aufbau des Symfony Backends entspricht aktuell der empfohlen
 \section{Gängige Schichtenarchitektur}
 \label{sec:standard-schichtenarchitektur}
 
-Symfony ist ein Webframework, welches aus vielen verschiedenen Komponenten und Bundles besteht, die alle unabhängig voneinander entwickelt werden. In Summe ergeben diese die Grundlage für eine Webapplikation auf Basis von PHP und werden auch von anderen Frameworks verwendet (beispielsweise Laravel\footnote{\href{https://laravel.com}{Laravel (https://laravel.com)}}, welches auf diversen Symfony-Komponenten basiert). Symfony orientiert sich dabei an der weit verbreiteten \textit{Model View Controller} Architektur (kurz \textit{MVC}) und bietet mittels flexiblem URI Routing, Session beziehungsweise Security Management und Logging unterstützende Funktionalitäten. \parencite[Vgl.][]{tutorials_point_i_pvt_ltd_symfony_nodate-1}
+Symfony ist ein Webframework, welches aus vielen verschiedenen Komponenten und Bundles besteht, die alle unabhängig voneinander entwickelt werden. In Summe ergeben diese die Grundlage für eine Webapplikation auf Basis von PHP und werden auch von anderen Frameworks verwendet (beispielsweise Laravel\footnote{\href{https://laravel.com}{Laravel (https://laravel.com)}}, welches auf diversen Symfony-Komponenten basiert). Symfony orientiert sich dabei an der weit verbreiteten \textit{Model View Controller} Architektur (kurz \textit{MVC}) und bietet mittels flexiblem URI Routing, Session beziehungsweise Security Management und Logging unterstützende Funktionalitäten. \parencite[][]{tutorials_point_i_pvt_ltd_symfony_nodate-1}
 
 \subsection{Empfohlener Ansatz}
 \label{sub-sec:empfohlener-ansatz}
-Symfony selbst gibt in der eigenen Dokumentation keine verpflichtenden Vorgaben an, wie genau man eine Applikation beziehungsweise Anwendung umsetzen soll. \parencite[Vgl.][]{symfony_symfony_2020} Der Quellcode~\ref{code:symfony-project-structure} auf Seite \pageref{code:symfony-project-structure} zeigt den empfohlenen Aufbau einer Anwendung, bei der man die Anlehnung an das MVC-Pattern jedoch gut erkennen kann:
+Symfony selbst gibt in der eigenen Dokumentation keine verpflichtenden Vorgaben an, wie genau man eine Applikation beziehungsweise Anwendung umsetzen soll. \parencite[][]{symfony_symfony_2020} Der Quellcode~\ref{code:symfony-project-structure} auf Seite \pageref{code:symfony-project-structure} zeigt den empfohlenen Aufbau einer Anwendung, bei der man die Anlehnung an das MVC-Pattern jedoch gut erkennen kann:
 
 \begin{itemize}
-    \item \textbf{Model:} Dem Model entsprechen die im \textit{Entity}-Verzeichnis abgelegten Klassen. Diese beinhalten das objektrelationale Mapping und können zusätzliche, domänenspezifische Funktionalitäten zur Verfügung stellen. Die Klassen, die im \textit{Repository}-Verzeichnis zu finden sind, stellen den Zugriff auf die Datenbank her und befüllen die Entities beziehungsweise Models mit Daten. \parencite[Vgl.][]{tutorials_point_i_pvt_ltd_symfony_nodate}
-    \item \textbf{View:} Im Falle der hier angenommenen Standardstruktur, wird der View-Teil mittels der Template Engine \textit{Twig} im gleichnamigen Verzeichnis abgehandelt. Im Falle des BLS ist dies mittels Data Transfer Objects gelöst, die bei den jeweiligen API Endpunkten als serialisierte JSON-Response zurückgegeben werden. \parencite[Vgl.][]{tutorials_point_i_pvt_ltd_symfony_nodate}
-    \item \textbf{Controller:} Die von der Namensgebung her am leichtesten zu erkennende Ähnlichkeit stellt das \textit{Controller}-Verzeichnis dar. Die darin vorhandenen Klassen werden verwendet, um eingehende Requests zu mappen. Diese Controller-Klassen sollten jedoch nur wenige Zeilen Code beinhalten, um Berechtigungen zu überprüfen sowie die Response zu erstellen. Die tatsächliche Businesslogik wird in separate Klassen aufgeteilt, die vom Controller aufgerufen werden, um diese möglichst zu entkoppeln. \parencite[Vgl.][]{symfony_symfony_2020} Beim BLS liegt die Anwendungslogik beispielsweise in einem \textit{Manager}-Verzeichnis.
+    \item \textbf{Model:} Dem Model entsprechen die im \textit{Entity}-Verzeichnis abgelegten Klassen. Diese beinhalten das objektrelationale Mapping und können zusätzliche, domänenspezifische Funktionalitäten zur Verfügung stellen. Die Klassen, die im \textit{Repository}-Verzeichnis zu finden sind, stellen den Zugriff auf die Datenbank her und befüllen die Entities beziehungsweise Models mit Daten. \parencite[][]{tutorials_point_i_pvt_ltd_symfony_nodate}
+    \item \textbf{View:} Im Falle der hier angenommenen Standardstruktur, wird der View-Teil mittels der Template Engine \textit{Twig} im gleichnamigen Verzeichnis abgehandelt. Im Falle des BLS ist dies mittels Data Transfer Objects gelöst, die bei den jeweiligen API Endpunkten als serialisierte JSON-Response zurückgegeben werden. \parencite[][]{tutorials_point_i_pvt_ltd_symfony_nodate}
+    \item \textbf{Controller:} Die von der Namensgebung her am leichtesten zu erkennende Ähnlichkeit stellt das \textit{Controller}-Verzeichnis dar. Die darin vorhandenen Klassen werden verwendet, um eingehende Requests zu mappen. Diese Controller-Klassen sollten jedoch nur wenige Zeilen Code beinhalten, um Berechtigungen zu überprüfen sowie die Response zu erstellen. Die tatsächliche Businesslogik wird in separate Klassen aufgeteilt, die vom Controller aufgerufen werden, um diese möglichst zu entkoppeln. \parencite[][]{symfony_symfony_2020} Beim BLS liegt die Anwendungslogik beispielsweise in einem \textit{Manager}-Verzeichnis.
 \end{itemize}
 
 \begin{listing}[ht]
@@ -287,7 +277,7 @@ Die Funktionsweise der von Symfony vorgeschlagenen Architektur kann, unter Bezug
 
 \smallskip
 
-Im Zuge der Entwicklung einer Webapplikation mit entsprechendem Backend oder einer API wird oftmals auf CRUD beziehungsweise einen CRUD-ähnlichen Aufbau gesetzt. Die Nutzung eines einzelnen Models, dem jeweiligen DTO (sofern vorhanden) sowie der dazugehörenden Businesslogik ist dabei ein einfacher Weg, um schnell und anfangs unkompliziert Funktionalitäten für die CRUD Anwendungsfälle umsetzen zu können. Auch bei weiterführenden Nutzungsfällen, bei denen beispielsweise mehrere Models zusammengeführt und entsprechend validiert werden müssen, wird die bestehende Logik herangezogen und keine spezifische Auftrennung von ausgeführten Aktionen vorgenommen. Dadurch entsteht jedoch eine Vermischung von lesenden und schreibenden Zugriffen in der Anwendungslogik sowie der Funktionalitäten der entsprechenden Models. \parencite[Vgl.][]{fowler_cqrs_2011} Die Abbildung~\ref{fig:single-model-fowler} stellt diesen Umstand anschaulich im hellgrau hinterlegten Rechteck \enquote{Application} dar:
+Im Zuge der Entwicklung einer Webapplikation mit entsprechendem Backend oder einer API wird oftmals auf CRUD beziehungsweise einen CRUD-ähnlichen Aufbau gesetzt. Die Nutzung eines einzelnen Models, dem jeweiligen DTO (sofern vorhanden) sowie der dazugehörenden Businesslogik ist dabei ein einfacher Weg, um schnell und anfangs unkompliziert Funktionalitäten für die CRUD Anwendungsfälle umsetzen zu können. Auch bei weiterführenden Nutzungsfällen, bei denen beispielsweise mehrere Models zusammengeführt und entsprechend validiert werden müssen, wird die bestehende Logik herangezogen und keine spezifische Auftrennung von ausgeführten Aktionen vorgenommen. Dadurch entsteht jedoch eine Vermischung von lesenden und schreibenden Zugriffen in der Anwendungslogik sowie der Funktionalitäten der entsprechenden Models. \parencite[][]{fowler_cqrs_2011} Die Abbildung~\ref{fig:single-model-fowler} stellt diesen Umstand anschaulich im hellgrau hinterlegten Rechteck \enquote{Application} dar:
 
 \begin{figure}[ht]
     \centering
@@ -306,27 +296,27 @@ Die bisherigen Erfahrungen, die Fusonic mit dieser Herangehensweise gemacht hat,
 \label{sub-sec:cqrs-grundlagen}
 Um über das CQRS-Pattern sprechen zu können, werden einige grundlegende Begrifflichkeiten sowie Konzepte benötigt, die im weiteren Verlauf dessen Ursprung definieren und Verständnis schaffen sollen.
 
-CQRS, beziehungsweise die Terme \textit{Command} und \textit{Query}, beziehen sich auf das Prinzip der \textit{Command Query Separation} (kurz \textit{CQS}). \parencite[Vgl.][]{young_cqrs_2010} CQS definiert auf der einen Seite lesende und auf der anderen Seite schreibende Aktionen in einem System, die voneinander getrennt sind und unterschiedlich agieren sowie verschiedene Resultate als Folge haben:
+CQRS, beziehungsweise die Terme \textit{Command} und \textit{Query}, beziehen sich auf das Prinzip der \textit{Command Query Separation} (kurz \textit{CQS}). \parencite[][]{young_cqrs_2010} CQS definiert auf der einen Seite lesende und auf der anderen Seite schreibende Aktionen in einem System, die voneinander getrennt sind und unterschiedlich agieren sowie verschiedene Resultate als Folge haben:
 
 \begin{itemize}
-    \item Lesende Aktionen, sogenannte \textbf{Queries}, greifen auf Daten in einem System zu und liefern diese bei einem Aufruf als Ergebnis zurück. Durch das Ausführen der Aktion wird der Zustand eines Objekts oder des Systems im Ganzen nicht verändert. \parencite[Vgl.][]{fowler_commandqueryseparation_2005}
-    \item Schreibende Aktionen, sogenannte \textbf{Commands}, verändern Daten in einem System, führen jedoch zu keinem Rückgabewert. Durch das Ausführen der Aktion wird der Zustand eines Objekts oder des Systems im Ganzen bleibend verändert. \parencite[Vgl.][]{fowler_commandqueryseparation_2005}
+    \item Lesende Aktionen, sogenannte \textbf{Queries}, greifen auf Daten in einem System zu und liefern diese bei einem Aufruf als Ergebnis zurück. Durch das Ausführen der Aktion wird der Zustand eines Objekts oder des Systems im Ganzen nicht verändert. \parencite[][]{fowler_commandqueryseparation_2005}
+    \item Schreibende Aktionen, sogenannte \textbf{Commands}, verändern Daten in einem System, führen jedoch zu keinem Rückgabewert. Durch das Ausführen der Aktion wird der Zustand eines Objekts oder des Systems im Ganzen bleibend verändert. \parencite[][]{fowler_commandqueryseparation_2005}
 \end{itemize}
 
 \noindent
-Fowler beschreibt den Vorteil dieser Aufteilung damit, dass Methoden, die den Zustand eines Objekts oder Systems verändern, von denen logisch getrennt werden können, die nur lesend darauf zugreifen. Queries können dadurch \enquote{gefahrlos} und in beliebiger Reihenfolge an jeder Stelle in einer Anwendung eingesetzt werden, während dies bei Commands nicht gegeben ist. \parencite[Vgl.][]{fowler_commandqueryseparation_2005}
+Fowler beschreibt den Vorteil dieser Aufteilung damit, dass Methoden, die den Zustand eines Objekts oder Systems verändern, von denen logisch getrennt werden können, die nur lesend darauf zugreifen. Queries können dadurch \enquote{gefahrlos} und in beliebiger Reihenfolge an jeder Stelle in einer Anwendung eingesetzt werden, während dies bei Commands nicht gegeben ist. \parencite[][]{fowler_commandqueryseparation_2005}
 
 \subsection{Funktionsweise von CQRS}
 \label{sub-sec:cqrs-funktionsweise}
-Die Funktionsweise des CQRS Konzepts basiert, wie im Abschnitt~\ref{sub-sec:cqrs-grundlagen} beschrieben, auf dem Einsatz von Commands und Queries. Durch deren Einsatz wird eine effektive Aufteilung in zwei separate und optimalerweise unabhängige Modelle erzielt, wodurch zum einen ein Fokus auf die jeweilige Verantwortlichkeit des Modells gelegt werden kann und zum anderen die übermäßige Optimierung hin zu einer Datenbank wegfällt. Dadurch rückt die Anwendungs- beziehungsweise Businesslogik deutlich mehr in den Vordergrund und kann entsprechend besser ausgebaut und getestet werden. \parencite[Vgl.][]{heimeshoff_cqrs_2013}
+Die Funktionsweise des CQRS Konzepts basiert, wie im Abschnitt~\ref{sub-sec:cqrs-grundlagen} beschrieben, auf dem Einsatz von Commands und Queries. Durch deren Einsatz wird eine effektive Aufteilung in zwei separate und optimalerweise unabhängige Modelle erzielt, wodurch zum einen ein Fokus auf die jeweilige Verantwortlichkeit des Modells gelegt werden kann und zum anderen die übermäßige Optimierung hin zu einer Datenbank wegfällt. Dadurch rückt die Anwendungs- beziehungsweise Businesslogik deutlich mehr in den Vordergrund und kann entsprechend besser ausgebaut und getestet werden. \parencite[][]{heimeshoff_cqrs_2013}
 
 \medskip
 
 Anhand der Abbildung~\ref{fig:cqrs-fowler} auf Seite \pageref{fig:cqrs-fowler} wird verdeutlicht, wie der Ablauf in einem auf CQRS basierenden System abläuft:
 
-\textbf{Ändern von Daten:} Eine vom Benutzer ausgelöste Änderung der Daten (im Falle des BLS durch eine Aktion im Angular-Frontend) führt dazu, dass diese an ein Command Model weitergeleitet werden. Das Model beinhaltet die Daten, die abgeändert und persistiert werden sollen und stellt diese gegebenenfalls einem Domänenmodell mit entsprechenden Funktionalitäten - auf Basis des Domain-Driven Designs - zur Verfügung \parencite[vgl.][]{heimeshoff_cqrs_2013}. Das Command Model, dass die Integrität der eingehenden Daten sichergestellt hat, wird abschließend in der Datenbank persistiert, womit die Aktion somit - im Regelfall ohne Rückgabewert - abgeschlossen wird. \parencite[Vgl.][]{fowler_cqrs_2011}
+\textbf{Ändern von Daten:} Eine vom Benutzer ausgelöste Änderung der Daten (im Falle des BLS durch eine Aktion im Angular-Frontend) führt dazu, dass diese an ein Command Model weitergeleitet werden. Das Model beinhaltet die Daten, die abgeändert und persistiert werden sollen und stellt diese gegebenenfalls einem Domänenmodell mit entsprechenden Funktionalitäten - auf Basis des Domain-Driven Designs - zur Verfügung \parencite[][]{heimeshoff_cqrs_2013}. Das Command Model, dass die Integrität der eingehenden Daten sichergestellt hat, wird abschließend in der Datenbank persistiert, womit die Aktion somit - im Regelfall ohne Rückgabewert - abgeschlossen wird. \parencite[][]{fowler_cqrs_2011}
 
-\textbf{Abfragen von Daten:} Ein Abfragen der Daten (ebenfalls durch das Frontend ausgelöst) führt dazu, dass diese von der Datenbank geladen und mittels des Query Models (in manchen Fällen auch mehrerer) im entsprechenden Format serialisiert werden. Die Aktion wird damit abgeschlossen, dass die Daten nach außen als Rückgabewert(e) zurückgegeben oder dargestellt werden. \parencite[Vgl.][]{fowler_cqrs_2011}
+\textbf{Abfragen von Daten:} Ein Abfragen der Daten (ebenfalls durch das Frontend ausgelöst) führt dazu, dass diese von der Datenbank geladen und mittels des Query Models (in manchen Fällen auch mehrerer) im entsprechenden Format serialisiert werden. Die Aktion wird damit abgeschlossen, dass die Daten nach außen als Rückgabewert(e) zurückgegeben oder dargestellt werden. \parencite[][]{fowler_cqrs_2011}
 
 \vspace{0.5cm}
 
@@ -343,23 +333,23 @@ Mit Blick auf die Abschnitte~\ref{sec:standard-schichtenarchitektur} sowie \ref{
 
 \subsection{Vorteile von CQRS}
 \label{sub-sec:cqrs-vorteile}
-Die Vorteile von CQRS - im Vergleich zu einer gängigen Schichtenarchitektur beziehungsweise der Herangehensweise von Symfony - bauen im ersten Schritt darauf auf, dass komplexe und umfassende Domänen (und die dazugehörigen Prozesse) durch die Verwendung des Patterns gut aufgeteilt werden können. Das Verwenden von \textit{Commands} und \textit{Queries} ermöglicht eine einfache Handhabung der Code-Basis, indem die Wartbarkeit und Erweiterbarkeit verbessert wird. Darüber hinaus kann die Performanz des gesamten Systems durch die Aufteilung der Aktionen in lesende und schreibende Zugriffe verbessert werden und bietet die Möglichkeit, spezifische Anpassungen je Modell vorzunehmen. \parencite[Vgl.][Seite 240]{ingeno_software_2018}
+Die Vorteile von CQRS - im Vergleich zu einer gängigen Schichtenarchitektur beziehungsweise der Herangehensweise von Symfony - bauen im ersten Schritt darauf auf, dass komplexe und umfassende Domänen (und die dazugehörigen Prozesse) durch die Verwendung des Patterns gut aufgeteilt werden können. Das Verwenden von \textit{Commands} und \textit{Queries} ermöglicht eine einfache Handhabung der Code-Basis, indem die Wartbarkeit und Erweiterbarkeit verbessert wird. Darüber hinaus kann die Performanz des gesamten Systems durch die Aufteilung der Aktionen in lesende und schreibende Zugriffe verbessert werden und bietet die Möglichkeit, spezifische Anpassungen je Modell vorzunehmen. \parencite[][Seite 240]{ingeno_software_2018}
 
-Die Aufteilung in unabhängige Commands und Queries bietet zudem den Vorteil, dass Applikationen mit einem hohen Performanzanspruch besser eingeteilt und skaliert werden können. Anhand des jeweiligen Anwendungsfalls kann die Last von lesenden und schreibenden Zugriffen unabhängig voneinander getrennt und, sofern notwendig, auch auf mehrere Datenbanksysteme verteilt werden. \parencite[Vgl.][]{fowler_cqrs_2011}
+Die Aufteilung in unabhängige Commands und Queries bietet zudem den Vorteil, dass Applikationen mit einem hohen Performanzanspruch besser eingeteilt und skaliert werden können. Anhand des jeweiligen Anwendungsfalls kann die Last von lesenden und schreibenden Zugriffen unabhängig voneinander getrennt und, sofern notwendig, auch auf mehrere Datenbanksysteme verteilt werden. \parencite[][]{fowler_cqrs_2011}
 
-Sicherheit, beziehungsweise der besser passende, englische Begriff \textit{Security}, ist ein wichtiger Bestandteil moderner (Web-)Anwendungen. Durch CQRS ist es möglich, den Zugriff und das Bearbeiten von Daten genauer einzugrenzen und nur berechtigten Klassen schreibende Aktionen zu erlauben. Dieser Umstand lässt sich im weiteren Verlauf zudem einfacher testen, was bedeutet, dass ungewollte Sicherheitslücken beziehungsweise das Preisgeben von Daten minimiert werden kann. \parencite[Vgl.][Seite 240]{ingeno_software_2018}
+Sicherheit, beziehungsweise der besser passende, englische Begriff \textit{Security}, ist ein wichtiger Bestandteil moderner (Web-)Anwendungen. Durch CQRS ist es möglich, den Zugriff und das Bearbeiten von Daten genauer einzugrenzen und nur berechtigten Klassen schreibende Aktionen zu erlauben. Dieser Umstand lässt sich im weiteren Verlauf zudem einfacher testen, was bedeutet, dass ungewollte Sicherheitslücken beziehungsweise das Preisgeben von Daten minimiert werden kann. \parencite[][Seite 240]{ingeno_software_2018}
 
 \subsection{Nachteile von CQRS}
 \label{sub-sec:nachteile-cqrs}
 Neben den Vorteilen, die CQRS mit sich bringt, gibt es jedoch auch Nachteile gegenüber einem Aufbau, der ohne spezifische Auftrennung der Aktionen auskommt (siehe dazu Abschnitt~\ref{sub-sec:standard-funktionsweise} auf Seite \pageref{sub-sec:standard-funktionsweise}).
 
-Für Anwendungen oder APIs, die lediglich einfache \textit{Create}, \textit{Read}, \textit{Update} und \textit{Delete} Funktionalitäten benötigen, stellt die Implementierung von CQRS einen Mehraufwand dar, der womöglich nicht gerechtfertigt ist. Das Pattern bringt zwar die in Abschnitt~\ref{sub-sec:cqrs-vorteile} genannten Vorteile mit sich, die Komplexität des Systems steigt dadurch aber gleichzeitig an und eignet sich daher nicht für alle Anwendungsfälle, oder zumindest nicht für eine Implementierung im gesamten System. \parencite[Vgl.][Seite 241]{ingeno_software_2018}
+Für Anwendungen oder APIs, die lediglich einfache \textit{Create}, \textit{Read}, \textit{Update} und \textit{Delete} Funktionalitäten benötigen, stellt die Implementierung von CQRS einen Mehraufwand dar, der womöglich nicht gerechtfertigt ist. Das Pattern bringt zwar die in Abschnitt~\ref{sub-sec:cqrs-vorteile} genannten Vorteile mit sich, die Komplexität des Systems steigt dadurch aber gleichzeitig an und eignet sich daher nicht für alle Anwendungsfälle, oder zumindest nicht für eine Implementierung im gesamten System. \parencite[][Seite 241]{ingeno_software_2018}
 
-Der Vorteil der Auftrennung in Commands und Queries und damit einhergehenden getrennten Datenbanken führt zu einer weiteren Herausforderung, da sichergestellt werden muss, dass diese untereinander konsistent gehalten werden, um nicht unbeabsichtigt mit veralteten Daten zu arbeiten. \parencite[Vgl.][Seite 241]{ingeno_software_2018}
+Der Vorteil der Auftrennung in Commands und Queries und damit einhergehenden getrennten Datenbanken führt zu einer weiteren Herausforderung, da sichergestellt werden muss, dass diese untereinander konsistent gehalten werden, um nicht unbeabsichtigt mit veralteten Daten zu arbeiten. \parencite[][Seite 241]{ingeno_software_2018}
 
-Heimeshoff und Jander beschreiben weiters den Umstand, dass der Planungs- und Konzeptionsaufwand durch den Einsatz von CQRS bei kleineren Anwendungen nicht direkt im Verhältnis zur Implementierung steht. Die Verlagerung des Fokus muss jedoch nicht unbedingt als ein direkter Nachteil gesehen werden, darf laut ihnen dabei aber nicht außer Acht gelassen werden. \parencite[Vgl.][]{heimeshoff_cqrs_2013}
+Heimeshoff und Jander beschreiben weiters den Umstand, dass der Planungs- und Konzeptionsaufwand durch den Einsatz von CQRS bei kleineren Anwendungen nicht direkt im Verhältnis zur Implementierung steht. Die Verlagerung des Fokus muss jedoch nicht unbedingt als ein direkter Nachteil gesehen werden, darf laut ihnen dabei aber nicht außer Acht gelassen werden. \parencite[][]{heimeshoff_cqrs_2013}
 
-Auch Fowler rät von einem unbedachten Einsatz des Patterns ab und betont, dass viele Nutzungsfälle auch mit einem typischen Ansatz ohne Trennung auskommen. \parencite[Vgl.][]{fowler_cqrs_2011}
+Auch Fowler rät von einem unbedachten Einsatz des Patterns ab und betont, dass viele Nutzungsfälle auch mit einem typischen Ansatz ohne Trennung auskommen. \parencite[][]{fowler_cqrs_2011}
 
 % Literaturverzeichnis:
 \clearpage
