@@ -351,6 +351,32 @@ Heimeshoff und Jander beschreiben weiters den Umstand, dass der Planungs- und Ko
 
 Auch Fowler rät von einem unbedachten Einsatz des Patterns ab und betont, dass viele Nutzungsfälle auch mit einem typischen Ansatz ohne Trennung auskommen. \parencite[][]{fowler_cqrs_2011}
 
+\chapter{Umsetzung}
+\label{chap:Umsetzung}
+Dieses Kapitel beleuchtet nachfolgend die Umsetzung der in Abschnitt~\ref{sec:zielsetzung} auf Seite \pageref{sec:zielsetzung} beschriebenen Ziele anhand von \colorbox{yellow}{zwei} Beispielen und geht dabei genauer auf die technische Herangehensweise sowie Implementierung des CQRS Patterns ein. Anhand der Beispiele wird des Weiteren auf damit verbundene Schwierigkeiten sowie projektspezifische Eigenheiten eingegangen.
+
+\section{Entwicklungsumgebung}
+\label{sec:entwicklungsumgebung}
+Für die Dauer des Berufspraktikums wurde hauptsächlich die Entwicklungsumgebung beziehungsweise IDE PhpStorm\footnote{\href{https://www.jetbrains.com/phpstorm}{PhpStorm (https://www.jetbrains.com/phpstorm)}} zur aktiven Umsetzung neuer Funktionalitäten im Better Life System verwendet. Selten kam Visual Studio Code\footnote{\href{https://code.visualstudio.com}{Visual Studio Code (https://code.visualstudio.com)}} zum Einsatz, welches aufgrund von persönlichen Präferenzen für das Auflösen von Merge Konflikten, die während des Rebasings aufgetreten sind, eingesetzt wurde.
+
+\medskip
+
+Aufgrund der Komplexität des gesamten Projektes und der Notwendigkeit eines Servers, welches das PHP Backend zur Verfügung stellt, sind die einzelnen Komponenten (dazu gehören unter anderem ein Webserver, MySQL Datenbanken, ein Cache-Server sowie ein lokaler Mailserver) jeweils in einem Docker Container untergebracht. Mithilfe eines während des Berufspraktikums erstellten \textit{Makefiles}, welches die am häufigsten verwendeten Befehle (unter anderem starten, stoppen und ausführen weiterer Aktionen) beinhaltet, kann die gesamte Applikation samt dem dazugehörigen Frontend lokal aufgesetzt und zur Entwicklung verwendet werden.
+
+\section{Git Branching-Strategie}
+\label{sec:git-branching-strategie}
+Das Projekt rund um das Better Life System verfolgt, ähnlich wie andere Projekte der Fusonic GmbH, eine möglichst einheitliche und leicht verständliche Git Branching-Strategie, die das Zusammenarbeiten im Team erleichtern soll.
+
+\medskip
+
+Neben einem \textit{stage} und \textit{production} Branch, auf denen die Produktivsysteme mit Kundenzugriff basieren, gibt es einen \textit{master} Branch, der als Ausgangspunkt für alle neu entstehenden Funktionalitäten und Codeänderungen dient. Wenn eine neue Funktion entwickelt oder ein Bug behoben werden muss, wird ein sogenannter \enquote{Feature} Branch erstellt, der alle entsprechenden Änderungen beinhaltet. Nach abgeschlossener Entwicklung wird eine Pull- (oder auch Merge-) Request erstellt, ein entsprechendes Code Review vorgenommen und der Feature Branch schlussendlich in den master Branch gemerged.
+
+\medskip
+
+Die hier beschriebene und beim Better Life System verwendete Herangehensweise orientiert sich am sogenannten \enquote{Git Feature Branch Workflow}. Die Entwicklung findet hierbei unabhängig vom master Branch statt und neu entwickelte Funktionalitäten und Änderungen werden gekapselt, um ein einfaches Zusammenarbeiten zu ermöglichen. Des Weiteren ist dadurch der Vorteil gegeben, dass durch den Einsatz von separaten Branches und der Verwendung von Pull Requests sichergestellt werden kann, dass der master Branch zu jedem Zeitpunkt funktionsfähigen Programmcode beinhaltet und somit für eine entsprechende Veröffentlichung oder als Ausgangspunkt herangezogen werden kann.
+
+https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow
+
 % Literaturverzeichnis:
 \clearpage
 \phantomsection
