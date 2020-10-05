@@ -1,0 +1,20 @@
+src/
+    Region/
+        Controller/
+            RegionController.php
+        Message/
+            Command/
+                UpdateRegionCommand.php
+            CommandHandler/
+                UpdateRegionCommandHandler.php
+            Query/
+                GetAllRegionsQuery.php
+                GetRegionQuery.php
+            QueryHandler/
+                GetAllRegionsQueryHandler.php
+                GetRegionQueryHandler.php
+            Response/
+                GetAllRegionsResponse.php
+                GetRegionResponse.php
+                UpdateRegionResponse.php
+        Repository/

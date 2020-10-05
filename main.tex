@@ -376,7 +376,7 @@ Die hier beschriebene und beim Better Life System verwendete Herangehensweise or
 
 \section{Implementierung von CQRS anhand des \enquote{Region} API Endpunktes}
 \label{sec:cqrs-implementierung-region}
-Das Better Life System unterscheidet in der Verwaltung von Produkten, der Angebotserstellung und anderweitigen Bereichen im System zwischen verschiedenen Regionen. Um dem Frontend entsprechende Informationen bereitstellen zu können, bedarf es eines entsprechenden API Endpunktes, der diese Informationen zur Verfügung stellt und Änderungen entgegen nimmt. Wie die meisten anderen API Endpunkte besteht der \enquote{Region} Endpunkt bereits in der ersten Version (nachfolgend \textit{v1} genannt) beziehungsweise auf Basis der gängigen Schichtenarchitektur (siehe dazu Abschnitt~\ref{sec:standard-schichtenarchitektur} auf Seite \pageref{sec:standard-schichtenarchitektur}).
+Das Better Life System unterscheidet in der Verwaltung von Produkten, der Angebotserstellung und anderweitigen Bereichen im System zwischen verschiedenen Regionen. Um dem Frontend entsprechende Informationen bereitstellen zu können, bedarf es eines API Endpunktes, der diese Informationen zur Verfügung stellt und Änderungen entgegen nimmt. Wie die meisten anderen API Endpunkte besteht der \enquote{Region} Endpunkt bereits in der ersten Version (nachfolgend \textit{v1} genannt) beziehungsweise auf Basis der gängigen Schichtenarchitektur (siehe dazu Abschnitt~\ref{sec:standard-schichtenarchitektur} auf Seite \pageref{sec:standard-schichtenarchitektur}).
 
 \smallskip
 
@@ -406,7 +406,44 @@ Der angesprochene \textit{RegionManager}, welcher vom Controller aufgerufen wird
 
 \medskip
 
-Die Abbildung BLA BLA BLA gibt nochmals einen Überblick über den oben beschriebenen Aufbau des v1 Endpunktes anhand eines UML Diagramms:
+Die Abbildung~\ref{fig:region-v1-uml} auf Seite \pageref{fig:region-v1-uml} gibt nochmals einen Überblick über den oben beschriebenen Aufbau des v1 Endpunktes anhand eines grundlegenden UML Diagramms:
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.48]{images/region-v1-uml.png}
+    \caption[UML Diagramm des v1 Region Endpunktes]{Grundlegender Aufbau des v1 Region Endpunktes samt interner Abhängigkeiten}
+    \label{fig:region-v1-uml}
+\end{figure}
+
+\subsection{Aufbau des v2 Endpunktes}
+\label{sub-sec:region-aufbau-v2}
+Für die Umsetzung des CQRS Patterns mit dem Symfony Framework wird im Better Life System auf die von Symfony zur Verfügung gestellte \textit{Messenger}\footnote{\href{https://symfony.com/doc/4.4/components/messenger.html}{The Messenger Component - (https://symfony.com/doc/4.4/components/messenger.html)}} Komponente zurückgegriffen. Diese ermöglicht es, Commands und Queries in sogenannte \textit{Envelopes} zu verpacken und von einem entsprechenden \textit{CommandHandler} beziehungsweise \textit{QueryHandler} abarbeiten zu lassen. Diese Komponente kommt mit einer Vielzahl von weiteren Funktionalitäten, Konzepten und Patterns, welche im Verlauf dieser Bachelorarbeit jedoch nicht weiter beleuchtet werden.
+
+Die Struktur des in Quellcode~\ref{code:region-controller-v1} auf Seite \pageref{code:region-controller-v1} aufgezeigten Controllers bleibt auch in der CQRS-Version nahezu gleich. Primär verändert sich hierbei die Verantwortung und damit die Größe der einzelnen Methoden, da diese nur noch für die Authentifizierung und Rückgabe der von Symfony benötigten Response zuständig sind. Jegliche weitere Ablauf- und/oder Businesslogik wurde in die jeweiligen Command- beziehungsweise QueryHandler verschoben.
+
+\medskip
+
+Der Quellcode~\ref{code:region-v2-structure} auf Seite \pageref{code:region-v2-structure} zeigt den Aufbau der v2 Struktur auf, bei der bereits deutlich die Trennung von Commands und Queries ersichtlich ist, ohne die zugrundeliegende Logik zu kennen.
+
+\begin{listing}[ht]
+    \inputminted[fontsize=\footnotesize,linenos]{text}{code/region_v2_structure.txt}
+    \caption[Ordnerstruktur des v2 Region Endpunktes]{Ordnerstruktur des v2 Region Endpunktes}
+    \label{code:region-v2-structure}
+\end{listing}
+
+\subsubsection{Das \enquote{UpdateRegionCommand} und der entsprechende CommandHandler}
+\label{sub-sub-sec:update-region-command}
+Wie in Abschnitt~\ref{sub-sec:cqrs-grundlagen} auf Seite \pageref{sub-sec:cqrs-funktionsweise} beschrieben, werden schreibende und lesende Aktionen voneinander getrennt. Das Updaten beziehungsweise Aktualisieren einer Region entspricht einer schreibenden Aktion und wird daher mit einem Command abgehandelt.
+
+Ein Command besteht in der im BLS praktizierten Umsetzung aus privaten Attributen und dazugehörigen Gettern und Settern, die öffentlich aufgerufen werden können. Die Daten, die für die Aktualisierung herangezogen werden sollen, sind bereits vom Angular Frontend validiert, werden - wie in Quellcode~\ref{code:update-region-command} auf Seite \pageref{code:update-region-command} ersichtlich ist - jedoch auch noch einmal vom Backend überprüft. Die angewandte Validierung sowie das vorherige setzten der Daten wird hierbei von Symfony in Zusammenspiel mit entsprechenden Erweiterungen vorgenommen.
+
+\begin{listing}[ht]
+    \inputminted[fontsize=\footnotesize,linenos,breaklines]{php}{code/update_region_command.php}
+    \caption[Das \enquote{UpdateRegionCommand}]{Das \enquote{UpdateRegionCommand}}
+    \label{code:update-region-command}
+\end{listing}
+
+Der zum UpdateRegionCommand dazugehörende CommandHandler umfasst die Ablauf- und Businesslogik, die sich zuvor im v1 RegionController sowie RegionManager befunden hat und für das Aktualisieren der Daten tatsächlich benötigt wird.
 
 % Literaturverzeichnis:
 \clearpage
