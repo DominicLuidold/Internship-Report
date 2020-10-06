@@ -14,7 +14,5 @@ src/
                 GetAllRegionsQueryHandler.php
                 GetRegionQueryHandler.php
             Response/
-                GetAllRegionsResponse.php
-                GetRegionResponse.php
-                UpdateRegionResponse.php
+                RegionResponse.php
         Repository/
