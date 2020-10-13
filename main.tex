@@ -363,7 +363,7 @@ Für die Dauer des Berufspraktikums wurde hauptsächlich die IDE beziehungsweise
 
 \smallskip
 
-Aufgrund der Komplexität des gesamten Projektes und der Notwendigkeit eines Servers, welches das PHP Backend zur Verfügung stellt, sind die einzelnen Komponenten (dazu gehören unter anderem ein Webserver, MySQL Datenbanken, ein Cache-Server sowie ein lokaler Mailserver) jeweils in einem Docker Container untergebracht. Mithilfe eines während des Berufspraktikums erstellten \textit{Makefiles}, welches die am häufigsten verwendeten Befehle (unter anderem starten, stoppen und ausführen weiterer Aktionen) beinhaltet, kann die gesamte Applikation samt dem dazugehörigen Frontend lokal aufgesetzt und zur Entwicklung verwendet werden.
+Aufgrund der Komplexität des gesamten Projektes und der Notwendigkeit eines Servers, welches das PHP Backend zur Verfügung stellt, sind die einzelnen Komponenten (dazu gehören unter anderem ein Webserver, MySQL Datenbanken, ein Cache-Server sowie ein lokaler Mailserver) jeweils in einem Docker Container untergebracht. Mithilfe eines während des Berufspraktikums erstellten \textit{Makefiles}, welches die am häufigsten verwendeten Befehle (unter anderem starten, stoppen und ausführen weiterer Aktionen) beinhaltet, kann die gesamte Applikation, samt dem dazugehörigen Frontend, lokal aufgesetzt und zur Entwicklung verwendet werden.
 
 Damit zu jedem Zeitpunkt der Entwicklung und auch rückwirkend der jeweilige Stand entsprechend verwendet werden kann, ist ein kompatibler Datenbank Dump in der Git Versionshistorie inkludiert.
 
@@ -377,13 +377,13 @@ Neben einem \textit{stage} und \textit{production} Branch, auf denen die Produkt
 
 \medskip
 
-Die hier beschriebene und beim Better Life System verwendete Herangehensweise orientiert sich am sogenannten \enquote{Git Feature Branch Workflow}. Die Entwicklung von neuen Funktionalitäten sowie Codeänderungen werden in einem Feature Branch gekapselt und sind unabhängig vom master Branch, was ein einafches Zusammenarbeiten ermöglicht. Des Weiteren ist dadurch der Vorteil gegeben, dass der master Branch - durch die Verwendung von jeweils separaten Branches und dazugehörigen Pull Requests - zu jedem Zeitpunkt funktionsfähigen Programmcode beinhaltet. Somit kann dieser für eine entsprechende Veröffentlichung oder als Ausgagspunkt für weitere Branches herangezogen werden. \parencite[]{atlassian_git_2020}
+Die hier beschriebene und beim Better Life System verwendete Herangehensweise orientiert sich am sogenannten \enquote{Git Feature Branch Workflow}. Die Entwicklung von neuen Funktionalitäten sowie Codeänderungen werden in einem Feature Branch gekapselt und sind unabhängig vom master Branch, was ein einfaches Zusammenarbeiten ermöglicht. Des Weiteren ist dadurch der Vorteil gegeben, dass der \textit{master} Branch - durch die Verwendung von jeweils separaten Branches und dazugehörigen Pull Requests - zu jedem Zeitpunkt funktionsfähigen Programmcode beinhaltet. Somit kann dieser für eine entsprechende Veröffentlichung oder als Ausgangspunkt für weitere Branches herangezogen werden. \parencite[]{atlassian_git_2020}
 
 \clearpage
 
 \section{Implementierung von CQRS anhand des \enquote{Region} API Endpunktes}
 \label{sec:cqrs-implementierung-region}
-Das Better Life System unterscheidet in der Verwaltung von Produkten, der Angebotserstellung und anderweitigen Bereichen im System zwischen verschiedenen Regionen. Um dem Frontend entsprechende Informationen bereitstellen zu können, bedarf es eines API Endpunktes, der diese Informationen zur Verfügung stellt und Änderungen entgegennimmt. Wie die meisten anderen API Endpunkte besteht der \enquote{Region} Endpunkt bereits in der ersten Version (nachfolgend \textit{v1} genannt) beziehungsweise auf Basis der gängigen Schichtenarchitektur (siehe dazu Abschnitt~\ref{sec:standard-schichtenarchitektur} auf Seite \pageref{sec:standard-schichtenarchitektur}).
+Das Better Life System unterscheidet in der Verwaltung von Produkten, der Angebotserstellung und anderweitigen Bereichen im System zwischen verschiedenen Regionen. Um dem Frontend entsprechende Informationen bereitstellen zu können, bedarf es eines API Endpunktes, der diese Informationen zur Verfügung stellt und Änderungen entgegen nimmt. Wie die meisten anderen API Endpunkte besteht der \enquote{Region} Endpunkt bereits in der ersten Version (nachfolgend \textit{v1} genannt) beziehungsweise auf Basis der gängigen Schichtenarchitektur (siehe dazu Abschnitt~\ref{sec:standard-schichtenarchitektur} auf Seite \pageref{sec:standard-schichtenarchitektur}).
 
 \smallskip
 
@@ -391,7 +391,7 @@ Im Zuge der Umstellung auf das CQRS Pattern dient die Version 2 (nachfolgend \te
 
 \subsection{Aufbau des v1 Endpunktes}
 \label{sub-sec:region-aufbau-v1}
-Der bisherige Aufbau des Region API Endpunktes baut darauf auf, dass der entsprechende \texttt{Controller} - welcher schematisch auf auf Seite \pageref{code:region-controller-v1} dargestellt ist und die Anfragen des Frontends von Symfony zugespielt bekommt - einen Großteil der Ablauflogik übernimmt. Dazu gehört - je nach Typ der Anfrage (\enquote{GET}, \enquote{POST}, \enquote{PATCH} etc.) - unter anderem:
+Der bisherige Aufbau des Region API Endpunktes baut darauf auf, dass der entsprechende \texttt{Controller} - welcher schematisch auf Seite \pageref{code:region-controller-v1} dargestellt ist und die Anfragen des Frontends von Symfony zugespielt bekommt - einen Großteil der Ablauflogik übernimmt. Dazu gehört - je nach Typ der Anfrage (\enquote{GET}, \enquote{POST}, \enquote{PATCH} etc.) - unter anderem:
 
 \begin{itemize}
     \item Definition der URI des API Endpunktes
@@ -446,7 +446,7 @@ Der Quellcode~\ref{code:region-v2-structure} auf Seite \pageref{code:region-v2-s
 \label{sub-sub-sec:update-region-command}
 Wie in Abschnitt~\ref{sub-sec:cqrs-grundlagen} auf Seite \pageref{sub-sec:cqrs-funktionsweise} beschrieben, werden schreibende und lesende Aktionen voneinander getrennt. Das Updaten beziehungsweise Aktualisieren einer Region entspricht einer schreibenden Aktion und wird daher mit einem Command abgehandelt.
 
-Ein Command besteht in der im BLS praktizierten Umsetzung aus privaten Attributen und dazugehörigen Gettern und Settern, die öffentlich aufgerufen werden können. Die Daten, die für die Aktualisierung herangezogen werden sollen, sind bereits vom Angular Frontend validiert, werden - wie in Quellcode~\ref{code:update-region-command} auf Seite \pageref{code:update-region-command} ersichtlich ist - jedoch auch noch einmal vom Backend überprüft, um fehlerhafte Eingaben vorzubeugen. Die angewandte Validierung sowie das vorherige setzten der Daten wird hierbei von Symfony in Zusammenspiel mit entsprechenden Erweiterungen vorgenommen.
+Ein Command besteht in der im BLS praktizierten Umsetzung aus privaten Attributen und dazugehörigen Gettern und Settern, die öffentlich aufgerufen werden können. Die Daten, die für die Aktualisierung herangezogen werden sollen, sind bereits vom Angular Frontend validiert, werden - wie in Quellcode~\ref{code:update-region-command} auf Seite \pageref{code:update-region-command} ersichtlich ist - jedoch auch noch einmal vom Backend überprüft, um fehlerhafte Eingaben vorzubeugen. Die angewandte Validierung sowie das vorherige Setzen der Daten wird hierbei von Symfony in Zusammenspiel mit entsprechenden Erweiterungen vorgenommen.
 
 \begin{listing}[ht]
     \inputminted[fontsize=\footnotesize,linenos,breaklines]{php}{code/update_region_command.php}
@@ -466,7 +466,7 @@ Der zum \texttt{UpdateRegionCommand} dazugehörende CommandHandler umfasst jene 
 
 Dem CommandHandler wird, anhand des Typs der beim Formalparameter \texttt{\$command} der \texttt{\_\_invoke} Funktion angeben ist, das entsprechende UpdateRegionCommand von Symfony übergeben. Im weiteren Verlauf wird das bereits bestehende Entity aus der Datenbank entnommen, mit den neuen Daten aktualisiert und entsprechend wieder abgespeichert.
 
-Im Regelfall werden schreibende Aktionen beziehungsweise Commands ohne einen Rückgabewert abgeschlossen. \parencite[]{fowler_commandqueryseparation_2005} In der im Better Life System angewandten Umsetzung wird hierbei jedoch ebenfalls eine Rückgabe in Form einer \texttt{RegionResponse} erzeugt, damit das Frontend die aktualisierten Daten ohne weitere API Aufrufe verwenden kann. Die RegionResponse gleicht Responses anderer v2 Endpunkte und besteht primär aus einer globalen Variable, in der das Entity abgespeichert ist. Zudem beinhaltet sie öffentlich aufrufbaren Getter, die Symfony im Zuge der Serialisierung aufruft, um einen entsprechenden JSON String zu erzeugen.
+Im Regelfall werden schreibende Aktionen beziehungsweise Commands ohne einen Rückgabewert abgeschlossen \parencite[]{fowler_commandqueryseparation_2005}. In der im Better Life System angewandten Umsetzung wird hierbei jedoch ebenfalls eine Rückgabe in Form einer \texttt{RegionResponse} erzeugt, damit das Frontend die aktualisierten Daten ohne weitere API Aufrufe verwenden kann. Die RegionResponse gleicht Responses anderer v2 Endpunkte und besteht primär aus einer globalen Variable, in der das Entity abgespeichert ist. Zudem beinhaltet sie öffentlich aufrufbaren Getter, die Symfony im Zuge der Serialisierung aufruft, um einen entsprechenden JSON String zu erzeugen.
 
 \subsubsection{Das \enquote{GetRegionQuery} und der entsprechende QueryHandler}
 \label{sub-sub-sec:get-region-query}
