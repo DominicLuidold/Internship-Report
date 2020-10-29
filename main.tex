@@ -39,17 +39,17 @@
 
 \section*{Sperrvermerk}
 \label{sec:sperrvermerk}
-Auf Wunsch der Firma Fusonic GmbH, im Auftrag der Viterma Handels GmbH, ist die vorliegende Arbeit bis zum [DATUM] für die öffentliche Nutzung zu sperren.
+Auf Wunsch der Firma Fusonic GmbH, im Auftrag der Viterma Handels GmbH, ist die vorliegende Arbeit bis zum 30. November 2023 für die öffentliche Nutzung zu sperren.
 
 Veröffentlichung, Vervielfältigung und Einsichtnahme sind ohne ausdrückliche Genehmigung der oben genannten Firma und dem Verfasser nicht gestattet. Der Titel der Arbeit sowie das Kurzreferat/Abstract dürfen jedoch veröffentlicht werden.
 
-\vspace{3cm}
+\vspace{5cm}
 
-\noindent Dornbirn, am [Datum] \hfill Unterschrift des Verfassers (Dominic Luidold)
+\noindent Dornbirn, am 30. November 2020\hfill Unterschrift des Verfassers
 
-\vspace{2cm}
+\vspace{5cm}
 
-\hfill Firmenstempel\hspace{2cm}
+\hfill Firmenstempel\hspace{0.8cm}
 
 % Titelblatt:
 % \newpage\mbox{}\newpage
@@ -83,7 +83,7 @@ Veröffentlichung, Vervielfältigung und Einsichtnahme sind ohne ausdrückliche 
 
     Vorgelegt von\newline
     Dominic Luidold\newline
-    Dornbirn, [Datum]
+    Dornbirn, 30. November 2020
     \end{flushleft}
 \end{titlepage}
 
@@ -522,22 +522,45 @@ Der Einsatz von deutlich spezifischeren Tests bringt den Vorteil mit sich, dass 
 
 \clearpage
 
+\chapter{Zusammenfassung \& Ausblick}
+\label{chap:zusammenfassung-ausblick}
+
+Das nachfolgende Kapitel fasst die während des Berufspraktikums durchgeführten Tätigkeiten noch einmal zusammen, gibt einen Überblick über die erreichten Ergebnisse und wägt ab, ob die geplante Zielsetzung erreicht wurde. Des Weiteren wird ein Ausblick auf das Better Life System und die damit in Zusammenhang stehende Verwendung des CQRS Patterns gegeben.
+
+\section{Zusammenfassung}
+\label{sec:zusammenfassung}
+Aufgrund interner Erfahrungen und Evaluierungen stand bereits zu Beginn des Berufspraktikums fest, dass das Better Life System sukzessive von einer klassischen Schichtenarchitektur auf das CQRS Pattern umgestellt werden soll. Im Zuge der Einführung und Einarbeitung in das seit längerem bestehende Projekt wurden grundlegende Ziele beziehungsweise Aufgaben definiert. Zu den Zielen, die in Abschnitt~\ref{sec:zielsetzung} auf Seite \pageref{sec:zielsetzung} angeführt sind, gehören die Umstellung bestehender API Endpunkte, die Umsetzung neuer Funktionalitäten mittels CQRS und das Abwickeln des Tagesgeschäftes.
+
+\medskip
+
+Die Anforderungen der Viterma Handels GmbH an Fusonic waren beziehungsweise sind, die Umstellung auf die neue Herangehensweise parallel zur allgemeinen Weiterentwicklung und Implementierung neuer Funktionalitäten durchzuführen. Daraus hat sich ergeben, dass zu Beginn zuerst neue Funktionalitäten implementiert und die Grundlagen für die Verwendung von CQRS im bestehenden System geschaffen wurden. Ab der Mitte des dreieinhalb Monate dauernden Berufspraktikums wurde dann der Fokus auf die Umstellung kleinerer und leicht anpassbarer API Endpunkte gelegt, während neu benötigte Funktionalitäten ab diesem Zeitpunkt bereits mittels CQRS umgesetzt wurden.
+
+Mit Abschluss des Berufspraktikums und der damit einhergehenden Übergabe an die restlichen Mitglieder des Entwicklungsteams konnte festgestellt werden, dass die zu Beginn definierten Ziele erfüllt wurden. Das laufende Tagesgeschäft (sprich kleinere Änderungen, Bugfixes etc.) sowie die Umstellung und Neuentwicklung ausgewählter Endpunkte konnte ohne größere Probleme abgewickelt beziehungsweise erreicht werden.
+
+\medskip
+
+Neben den definierten Zielen wurde während der Entwicklung ein Augenmerk auf eine möglichst hohe Codequalität gelegt, die mittels Code Review und dem Einsatz von entsprechend getestetem Programmcode erreicht wurde. Bestehende Tests wurden dabei für abgeänderte Funktionalitäten angepasst, während neue Unit Tests sowohl für den bisher verwendeten Ansatz der Schichtenarchitektur als auch für CQRS Komponenten erstellt wurden. Fortlaufende Code Reviews wurden im Zuge von Pull Requests stetig von allen Mitgliedern des Entwicklungsteams vorgenommen.
+
+\section{CQRS in Retrospektive}
+\label{sec:cqrs-retrospektive}
+TBD
+
+\section{Ausblick}
+\label{sec:ausblick}
+TBD
+
 % Literaturverzeichnis:
 \clearpage
 \phantomsection
 \addcontentsline{toc}{chapter}{Literaturverzeichnis}
 \printbibliography
 
-\chapter*{[evtl. Anhang]} % evtl. ersetzen mit \chapter*{Anhang}
-\addcontentsline{toc}{chapter}{[evtl. Anhang]} % evtl. ersetzen mit \addcontentsline{toc}{chapter}{Anhang}
-Formatvorlage für den Fließtext.
-
 \chapter*{Eidesstattliche Erklärung}
 \addcontentsline{toc}{chapter}{Eidesstattliche Erklärung}
 Ich erkläre hiermit an Eides statt, dass ich die vorliegende Bachelorarbeit I selbstständig und ohne Benutzung anderer als der angegebenen Hilfsmittel angefertigt habe. Die aus fremden Quellen direkt oder indirekt übernommenen Stellen sind als solche kenntlich gemacht. Die Arbeit wurde bisher weder in gleicher noch in ähnlicher Form einer anderen Prüfungsbehörde vorgelegt und auch noch nicht veröffentlicht.
 
-\vspace{3cm}
+\vspace{5cm}
 \noindent
-Dornbirn, am [Datum]\hfill Dominic Luidold
+Dornbirn, am 30. November 2020\hfill Dominic Luidold
 
 \end{document}
