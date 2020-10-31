@@ -178,7 +178,7 @@ Das Better Life System - welches von Fusonic GmbH entwickelt wird und mittels ei
 
 \section{Arbeitgeber Fusonic GmbH}
 \label{sec:arbeitgeber}
-Die Fusonic GmbH hat ihren Firmensitz in Götzis, Vorarlberg, und besteht aus einem Team von aktuell mehr als 25 Angestellten, Softwareentwicklerinnen und Projektleiterinnen. Diese sind aufgeteilt in diverse kleinere Teams, die intern unter anderem \enquote{Duck-Team} beziehungsweise \enquote{Parrot-Team} genannt werden. Die Teams arbeiten dabei an jeweils eigenständigen Projekten und setzen diverse Technologien ein. Zu den verwendeten Technologien gehören unter anderem C\# mit .NET, PHP mit Symfony und JavaScript/TypeScript mit Angular \parencite[]["Übersicht aller Technologien"]{fusonic_gmbh_web_2020}. Während es regelmäßigen Austausch unter den Teams gibt, besteht jedes aus Frontend- sowie Backend-Entwicklern, da die meisten Projekte - aufgrund der zugrundeliegenden Anwendungsfälle - aus einem Web-Frontend sowie serverseitigen Backend bestehen.
+Die Fusonic GmbH hat ihren Firmensitz in Götzis, Vorarlberg, und besteht aus einem Team von aktuell mehr als 25 Angestellten, Softwareentwickler*innen und Projektleiter*innen. Diese sind aufgeteilt in diverse kleinere Teams, die intern unter anderem \enquote{Duck-Team} beziehungsweise \enquote{Parrot-Team} genannt werden. Die Teams arbeiten dabei an jeweils eigenständigen Projekten und setzen diverse Technologien ein. Zu den verwendeten Technologien gehören unter anderem C\# mit .NET, PHP mit Symfony und JavaScript/TypeScript mit Angular \parencite[]["Übersicht aller Technologien"]{fusonic_gmbh_web_2020}. Während es regelmäßigen Austausch unter den Teams gibt, besteht jedes aus Frontend- sowie Backend-Entwickler*innen, da die meisten Projekte - aufgrund der zugrundeliegenden Anwendungsfälle - aus einem Web-Frontend sowie serverseitigen Backend bestehen.
 
 \section{Nutzung \& Umfeld des \enquote{Better Life System}}
 \label{sec:nutzung-umfeld}
@@ -543,11 +543,17 @@ Neben den definierten Zielen wurde während der Entwicklung ein Augenmerk auf ei
 
 \section{CQRS in Retrospektive}
 \label{sec:cqrs-retrospektive}
-TBD
+Die Anwendung des CQRS Patterns im Better Life System hat mehrere Vorteile mit sich gebracht, die zum einen bereits in vorhergehenden Kapitel ausführlicher beleuchtet wurden (siehe beispielsweise Abschnitt~\ref{sub-sec:cqrs-vorteile} auf Seite \pageref{sub-sec:cqrs-vorteile}), zum anderen aber auch aus Sicht des Entwicklerteams positiv zu werten sind. Zwar bedarf es einer grundlegenden Konfiguration von Symfony Komponenten, damit das Pattern entsprechend angewendet werden kann, diese steht bei einem Projekt wie dem BLS jedoch im Verhältnis zum erzielten Endergebnis. Das Verständnis für das CQRS Pattern ist im Regelfall bereits nach kurzer Einarbeitung geben, wodurch man zügig mit dem tatsächlichen Entwickeln beginnen kann.
+
+Aufgrund der historisch gewachsenen Code-Basis und den sich stetig entwickelnden Anforderungen hat das BLS eine gewisse Komplexität erreicht. Die Nutzung einer gängigen Schichtenarchitektur war und ist zu jedem Zeitpunkt gut möglich, der Umstieg hat die Übersichtlichkeit und Zuständigkeit der einzelnen Komponenten jedoch merklich verbessert. Neben deutlich kleineren Klassen, einfacher testbaren Teilbereichen des Systems und einer verbesserten inhaltlichen Gruppierung ist ein leichterer Einstieg für neue Entwicklerinnen in das Projekt gegeben. Das Umsetzen neuer Funktionalitäten im Projekt fällt grundsätzlich leichter, birgt aufgrund der Anforderung der Rückwärtskompatibilität an machen Stellen jedoch auch ihre Tücken, wenn beide Architekturen in bereits bestehenden Komponenten zusammengeführt werden müssen.
 
 \section{Ausblick}
 \label{sec:ausblick}
-TBD
+Das Better Life System befindet sich zum Zeitpunkt des Verfassens dieser Arbeit weiterhin in Entwicklung und wird voraussichtlich auch noch einige Zeit weiterentwickelt werden. Da die Umstellung auf das CQRS Pattern laufend durchgeführt wurde und noch nicht vollständig abgeschlossen ist, müssen noch weitere Teile des bestehenden Systems aktualisiert und entsprechend angepasst werden. Die entsprechende Basis wurde dafür während des Berufspraktikums geschaffen sowie projektspezifische Herangehensweisen und Standards festgelegt, auf denen weitere Funktionalitäten und Anpassungen aufgebaut werden können.
+
+\medskip
+
+Die Nutzung des CQRS Patterns im Vergleich zu einer gängigen Schichtenarchitektur hat sich bereits zum Zeitpunkt des Berufspraktikums und innerhalb der Fusonic GmbH bewährt und lässt sich somit auch für andere Projekte, unter Berücksichtigung der allgemeinen Vor- beziehungsweise Nachteile, empfehlen.
 
 % Literaturverzeichnis:
 \clearpage
