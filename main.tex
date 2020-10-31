@@ -121,7 +121,19 @@ Zu guter Letzt möchte ich meine Arbeit all jenen widmen, die für die Gleichbeh
 
 \subsection*{[Deutscher Titel Ihrer Arbeit]}
 
-[Text des Kurzreferats]
+Das \enquote{Better Life System} ist eine mittels einer Weboberfläche und gängigen Webbrowsern bedienbare Anwendung, die Handelsvertreterinnen rund um die Viterma Handels GmbH unterstützt, ein Badezimmer anhand der persönlichen Anforderungen und Bedürfnisse der Endkunden zu konfigurieren und ein entsprechendes Angebot dafür zu erstellen.
+
+\medskip
+
+Das Better Life System ist bereits seit Frühjahr 2017 in Entwicklung und baut auf einer gängigen Schichtenarchitektur sowie der Programmiersprache PHP und dem PHP-Framework Symfony auf. Aufgrund von sich weiterentwickelnden Anforderungen an das Projekt und einer damit verbundenen, historisch gewachsenen Komplexität wurde der Entschluss getroffen, die Schichtenarchitektur sukzessive durch die Implementierung des \enquote{Command Query Responsibility Segregation} Patterns (kurz \enquote{CQRS}) zu ersetzen. Die Umstellung soll die Wartbarkeit und Erweiterbarkeit fördern sowie die Codequalität und Testbarkeit nachhaltig verbessern.
+
+\medskip
+
+Das CQRS Pattern beschreibt die Aufteilung von lesenden Aktionen und schreibenden Aktionen, die voneinander getrennt sind, unterschiedlich agieren sowie verschiedene Resultate als Folge haben. Lesende Aktionen greifen lediglich auf Daten zu und liefern diese als Ergebnis zurück, während schreibende Aktionen Daten verändern und keinen Rückgabewert zur Folge haben. Durch die Nutzung von CQRS können komplexe und umfassende Domänen besser aufgeteilt und leichter gehandhabt werden. Die Implementierung stellt jedoch auch einen Mehraufwand dar, welcher nicht bei allen Anwendungsfällen im Verhältnis zum Endresultat steht.
+
+\medskip
+
+Die zu Beginn des Berufspraktikums festgelegten Ziele konnten erfolgreich erfüllt werden und das Better Life System verwendet nun bei vorab bestehenden Teilbereichen und neu entwickelten Funktionalitäten das CQRS Pattern. Die angestrebte Verbesserung der Codequalität, leichtere Erweiterbarkeit sowie Testbarkeit konnte in den umgestellten Bereich erzielt werden und die abschließende Umstellung erfolgt laufend in der weiteren Entwicklung des Projektes.
 
 % Abstract:
 \newpage
@@ -143,6 +155,7 @@ Um die Lesbarkeit zu gewährleisten und zugunsten der Textökonomie werden die v
 
 % Inhaltsverzeichnis:
 \cleardoublepage % force output to a right page
+\setcounter{tocdepth}{2}
 \tableofcontents
 
 \clearpage
@@ -174,7 +187,7 @@ Um die Lesbarkeit zu gewährleisten und zugunsten der Textökonomie werden die v
 \label{chap:einleitung}
 Diese Bachelorarbeit verfolgt das Ziel, einen Einblick in die Implementierung und Erweiterung des bereits bestehenden Backend-Systems des \enquote{Better Life System} (kurz \enquote{BLS}) der Viterma Handels GmbH mit dem sogenannten \enquote{CQRS}-Pattern zu geben.
 
-Das Better Life System - welches von Fusonic GmbH entwickelt wird und mittels einer Weboberfläche und gängigen Webbrowsern bedient werden kann - ermöglicht es Endkunden, mithilfe einer Handelsvertreterin der Firma Viterma (beziehungsweise mit einer Vertreterin eines ihrer Franchise-Partner) ein Badezimmer anhand der jeweiligen Bedürfnisse auszusuchen und zu konfigurieren, um sich schlussendlich ein entsprechendes Angebot dafür erstellen zu lassen.
+Das Better Life System - welches von Fusonic GmbH entwickelt wird und mittels einer Weboberfläche und gängigen Webbrowsern bedient werden kann - ermöglicht es Handelsvertreterinnen (beziehungsweise Vertreterinnen eines ihrer Franchise-Partner) zusammen mit ihren Endkunden ein Badezimmer anhand der jeweiligen Bedürfnisse auszusuchen und zu konfigurieren, um schlussendlich ein entsprechendes Angebot dafür erstellen zu lassen.
 
 \section{Arbeitgeber Fusonic GmbH}
 \label{sec:arbeitgeber}
