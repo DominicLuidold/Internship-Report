@@ -125,15 +125,15 @@ Das \enquote{Better Life System} ist eine mittels einer Weboberfläche und gäng
 
 \medskip
 
-Das Better Life System ist bereits seit Frühjahr 2017 in Entwicklung und baut auf einer gängigen Schichtenarchitektur sowie der Programmiersprache PHP und dem PHP-Framework Symfony auf. Aufgrund von sich weiterentwickelnden Anforderungen an das Projekt und einer damit verbundenen, historisch gewachsenen Komplexität wurde der Entschluss getroffen, die Schichtenarchitektur sukzessive durch die Implementierung des \enquote{Command Query Responsibility Segregation} Patterns (kurz \enquote{CQRS}) zu ersetzen. Die Umstellung soll die Wartbarkeit und Erweiterbarkeit fördern sowie die Codequalität und Testbarkeit nachhaltig verbessern.
+Das Better Life System ist bereits seit Frühjahr 2017 in Entwicklung und baut auf einer gängigen Schichtenarchitektur sowie der Programmiersprache PHP und dem PHP-Framework \enquote{Symfony} auf. Aufgrund von sich weiterentwickelnden Anforderungen an das Projekt und einer damit verbundenen, historisch gewachsenen Komplexität wurde der Entschluss getroffen, die Schichtenarchitektur sukzessive durch die Implementierung des \enquote{Command Query Responsibility Segregation} Patterns (kurz \enquote{CQRS}) zu ersetzen. Die Umstellung soll die Wartbarkeit und Erweiterbarkeit fördern sowie die Codequalität und Testbarkeit nachhaltig verbessern.
 
 \medskip
 
-Das CQRS Pattern beschreibt die Aufteilung von lesenden und schreibenden Aktionen, die voneinander getrennt sind, unterschiedlich agieren sowie verschiedene Resultate als Folge haben. Lesende Aktionen greifen lediglich auf Daten zu und liefern diese als Ergebnis zurück, während schreibende Aktionen Daten verändern und keinen Rückgabewert zur Folge haben. Durch die Nutzung von CQRS können komplexe und umfassende Domänen besser aufgeteilt und leichter gehandhabt werden. Die Implementierung stellt jedoch auch einen Mehraufwand dar, welcher nicht bei allen Anwendungsfällen im Verhältnis zum Endresultat steht.
+Das CQRS Pattern beschreibt die Aufteilung von lesenden und schreibenden Aktionen, die voneinander getrennt sind, unterschiedlich agieren sowie verschiedene Resultate zur Folge haben. Lesende Aktionen greifen lediglich auf Daten zu und liefern diese als Ergebnis zurück, während schreibende Aktionen Daten verändern und keinen Rückgabewert zur Folge haben. Durch die Nutzung von CQRS können komplexe und umfassende Domänen besser aufgeteilt und leichter gehandhabt werden. Die Implementierung stellt jedoch auch einen Mehraufwand dar, welcher nicht bei allen Anwendungsfällen im Verhältnis zum Endresultat steht.
 
 \medskip
 
-Die zu Beginn des Berufspraktikums festgelegten Ziele konnten erfolgreich erfüllt werden und das Better Life System verwendet nun bei vorab bestehenden Teilbereichen und neu entwickelten Funktionalitäten das CQRS Pattern. Die angestrebte Verbesserung der Codequalität, leichtere Erweiterbarkeit sowie Testbarkeit konnte in den umgestellten Bereich erzielt werden und die abschließende Umstellung erfolgt laufend in der weiteren Entwicklung des Projektes.
+Die zu Beginn des Praktikums festgelegten Ziele konnten erfolgreich erfüllt werden und das Better Life System verwendet nun bei vorab bestehenden Teilbereichen und neu entwickelten Funktionalitäten das CQRS Pattern. Die angestrebte Verbesserung der Codequalität, leichtere Erweiterbarkeit sowie Testbarkeit konnte in den umgestellten Bereichen erzielt werden und die abschließende Umstellung erfolgt laufend in der weiteren Entwicklung des Projektes.
 
 % Abstract:
 \newpage
@@ -142,7 +142,19 @@ Die zu Beginn des Berufspraktikums festgelegten Ziele konnten erfolgreich erfül
 
 \subsection*{[English Title of your thesis]}
 
-[text of the abstract]
+The \enquote{Better Life System} is an application that can be operated via a web interface and common web browsers. Sales representatives around Viterma Handels GmbH can use it to configure a bathroom according to the personal requirements and needs of the end customer and to create a corresponding offer for it.
+
+\medskip
+
+The Better Life System has been in development since spring 2017 and is based on a multitier architecture as well as the PHP programming language and the PHP framework \enquote{Symfony}. Due to evolving project requirements and a related, historically grown complexity, the decision was made to successively replace the layer architecture by implementing the \enquote{Command Query Responsibility Segregation} pattern (short \enquote{CQRS}). The migration should promote maintainability and expandability as well as improve code quality and testability in the long term.
+
+\medskip
+
+The CQRS pattern describes the separation of reading and writing actions that are separate, act differently and produce different results. Read actions only access and return data as a result, while write actions modify data and do not return a value. By using CQRS, complex and comprehensive domains can be better divided and are easier to handle. However, the implementation also represents an additional effort which is not always proportional to the final result in all use cases.
+
+\medskip
+
+The objectives set at the beginning of the internship were successfully met and the Better Life System now uses the CQRS pattern for pre-existing sub-areas and newly developed functionalities. The desired improvement of the code quality, easier expandability and testability was achieved in the adapted areas and the final migration is being carried out continuously in the further development of the project.
 
 % Geschlechtergerechte Sprache:
 \newpage
@@ -546,7 +558,7 @@ Aufgrund interner Erfahrungen und Evaluierungen stand bereits zu Beginn des Beru
 
 \medskip
 
-Die Anforderungen der Viterma Handels GmbH an Fusonic waren beziehungsweise sind, die Umstellung auf die neue Herangehensweise parallel zur allgemeinen Weiterentwicklung und Implementierung neuer Funktionalitäten durchzuführen. Daraus hat sich ergeben, dass zu Beginn zuerst neue Funktionalitäten implementiert und die Grundlagen für die Verwendung von CQRS im bestehenden System geschaffen wurden. Ab der Mitte des dreieinhalb Monate dauernden Berufspraktikums wurde dann der Fokus auf die Umstellung kleinerer und leicht anpassbarer API Endpunkte gelegt, während neu benötigte Funktionalitäten ab diesem Zeitpunkt bereits mittels CQRS umgesetzt wurden.
+Die Anforderungen der Viterma Handels GmbH an Fusonic waren, beziehungsweise sind, die Umstellung auf die neue Herangehensweise parallel zur allgemeinen Weiterentwicklung und Implementierung neuer Funktionalitäten durchzuführen. Daraus hat sich ergeben, dass zu Beginn zuerst neue Funktionalitäten implementiert und die Grundlagen für die Verwendung von CQRS im bestehenden System geschaffen wurden. Ab der Mitte des dreieinhalb Monate dauernden Berufspraktikums wurde dann der Fokus auf die Umstellung kleinerer und leicht anpassbarer API Endpunkte gelegt, während neu benötigte Funktionalitäten ab diesem Zeitpunkt bereits mittels CQRS umgesetzt wurden.
 
 Mit Abschluss des Berufspraktikums und der damit einhergehenden Übergabe an die restlichen Mitglieder des Entwicklungsteams konnte festgestellt werden, dass die zu Beginn definierten Ziele erfüllt wurden. Das laufende Tagesgeschäft (sprich kleinere Änderungen, Bugfixes etc.) sowie die Umstellung und Neuentwicklung ausgewählter Endpunkte konnte ohne größere Probleme abgewickelt beziehungsweise erreicht werden.
 
@@ -556,7 +568,7 @@ Neben den definierten Zielen wurde während der Entwicklung ein Augenmerk auf ei
 
 \section{CQRS in Retrospektive}
 \label{sec:cqrs-retrospektive}
-Die Anwendung des CQRS Patterns im Better Life System hat mehrere Vorteile mit sich gebracht, die zum einen bereits in vorhergehenden Kapitel ausführlicher beleuchtet wurden (siehe beispielsweise Abschnitt~\ref{sub-sec:cqrs-vorteile} auf Seite \pageref{sub-sec:cqrs-vorteile}), zum anderen aber auch aus Sicht des Entwicklerteams positiv zu werten sind. Zwar bedarf es einer grundlegenden Konfiguration von Symfony Komponenten, damit das Pattern entsprechend angewendet werden kann, diese steht bei einem Projekt wie dem BLS jedoch im Verhältnis zum erzielten Endergebnis. Das Verständnis für das CQRS Pattern ist im Regelfall bereits nach kurzer Einarbeitung geben, wodurch zügig mit dem tatsächlichen Entwickeln begonnen werden kann.
+Die Anwendung des CQRS Patterns im Better Life System hat mehrere Vorteile mit sich gebracht, die zum einen bereits in vorhergehenden Kapitel ausführlicher beleuchtet wurden (siehe beispielsweise Abschnitt~\ref{sub-sec:cqrs-vorteile} auf Seite \pageref{sub-sec:cqrs-vorteile}), zum anderen aber auch aus Sicht des Entwicklerteams positiv zu werten sind. Zwar bedarf es einer grundlegenden Konfiguration von Symfony Komponenten, damit das Pattern entsprechend angewendet werden kann, diese steht bei einem Projekt wie dem BLS jedoch im Verhältnis zum erzielten Endergebnis. Das Verständnis für das CQRS Pattern ist im Regelfall bereits nach kurzer Einarbeitung gegeben, wodurch zügig mit dem tatsächlichen Entwickeln begonnen werden kann.
 
 Aufgrund der historisch gewachsenen Code-Basis und den sich stetig entwickelnden Anforderungen hat das BLS eine gewisse Komplexität erreicht. Die Nutzung einer gängigen Schichtenarchitektur war und ist zu jedem Zeitpunkt gut möglich, der Umstieg hat die Übersichtlichkeit und Zuständigkeit der einzelnen Komponenten jedoch merklich verbessert. Neben deutlich kleineren Klassen, einfacher testbaren Teilbereichen des Systems und einer verbesserten inhaltlichen Gruppierung ist ein leichterer Einstieg für neue Entwicklerinnen in das Projekt gegeben. Das Umsetzen neuer Funktionalitäten im Projekt fällt grundsätzlich leichter, birgt aufgrund der Anforderung der Rückwärtskompatibilität an machen Stellen jedoch auch ihre Tücken, wenn beide Architekturen in bereits bestehenden Komponenten zusammengeführt werden müssen.
 
