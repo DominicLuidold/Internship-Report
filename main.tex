@@ -121,7 +121,7 @@ Zu guter Letzt möchte ich meine Arbeit all jenen widmen, die für die Gleichbeh
 
 \subsection*{[Deutscher Titel Ihrer Arbeit]}
 
-Das \enquote{Better Life System} ist eine mittels einer Weboberfläche und gängigen Webbrowsern bedienbare Anwendung, die Handelsvertreterinnen rund um die Viterma Handels GmbH unterstützt, ein Badezimmer anhand der persönlichen Anforderungen und Bedürfnisse der Endkunden zu konfigurieren und ein entsprechendes Angebot dafür zu erstellen.
+Das \enquote{Better Life System} ist eine mittels einer Weboberfläche und gängigen Webbrowsern bedienbare Anwendung. Handelsvertreterinnen rund um die Viterma Handels GmbH können diese nutzen, um ein Badezimmer anhand der persönlichen Anforderungen und Bedürfnisse der Endkunden zu konfigurieren und ein entsprechendes Angebot dafür zu erstellen.
 
 \medskip
 
@@ -129,7 +129,7 @@ Das Better Life System ist bereits seit Frühjahr 2017 in Entwicklung und baut a
 
 \medskip
 
-Das CQRS Pattern beschreibt die Aufteilung von lesenden Aktionen und schreibenden Aktionen, die voneinander getrennt sind, unterschiedlich agieren sowie verschiedene Resultate als Folge haben. Lesende Aktionen greifen lediglich auf Daten zu und liefern diese als Ergebnis zurück, während schreibende Aktionen Daten verändern und keinen Rückgabewert zur Folge haben. Durch die Nutzung von CQRS können komplexe und umfassende Domänen besser aufgeteilt und leichter gehandhabt werden. Die Implementierung stellt jedoch auch einen Mehraufwand dar, welcher nicht bei allen Anwendungsfällen im Verhältnis zum Endresultat steht.
+Das CQRS Pattern beschreibt die Aufteilung von lesenden und schreibenden Aktionen, die voneinander getrennt sind, unterschiedlich agieren sowie verschiedene Resultate als Folge haben. Lesende Aktionen greifen lediglich auf Daten zu und liefern diese als Ergebnis zurück, während schreibende Aktionen Daten verändern und keinen Rückgabewert zur Folge haben. Durch die Nutzung von CQRS können komplexe und umfassende Domänen besser aufgeteilt und leichter gehandhabt werden. Die Implementierung stellt jedoch auch einen Mehraufwand dar, welcher nicht bei allen Anwendungsfällen im Verhältnis zum Endresultat steht.
 
 \medskip
 
@@ -556,17 +556,17 @@ Neben den definierten Zielen wurde während der Entwicklung ein Augenmerk auf ei
 
 \section{CQRS in Retrospektive}
 \label{sec:cqrs-retrospektive}
-Die Anwendung des CQRS Patterns im Better Life System hat mehrere Vorteile mit sich gebracht, die zum einen bereits in vorhergehenden Kapitel ausführlicher beleuchtet wurden (siehe beispielsweise Abschnitt~\ref{sub-sec:cqrs-vorteile} auf Seite \pageref{sub-sec:cqrs-vorteile}), zum anderen aber auch aus Sicht des Entwicklerteams positiv zu werten sind. Zwar bedarf es einer grundlegenden Konfiguration von Symfony Komponenten, damit das Pattern entsprechend angewendet werden kann, diese steht bei einem Projekt wie dem BLS jedoch im Verhältnis zum erzielten Endergebnis. Das Verständnis für das CQRS Pattern ist im Regelfall bereits nach kurzer Einarbeitung geben, wodurch man zügig mit dem tatsächlichen Entwickeln beginnen kann.
+Die Anwendung des CQRS Patterns im Better Life System hat mehrere Vorteile mit sich gebracht, die zum einen bereits in vorhergehenden Kapitel ausführlicher beleuchtet wurden (siehe beispielsweise Abschnitt~\ref{sub-sec:cqrs-vorteile} auf Seite \pageref{sub-sec:cqrs-vorteile}), zum anderen aber auch aus Sicht des Entwicklerteams positiv zu werten sind. Zwar bedarf es einer grundlegenden Konfiguration von Symfony Komponenten, damit das Pattern entsprechend angewendet werden kann, diese steht bei einem Projekt wie dem BLS jedoch im Verhältnis zum erzielten Endergebnis. Das Verständnis für das CQRS Pattern ist im Regelfall bereits nach kurzer Einarbeitung geben, wodurch zügig mit dem tatsächlichen Entwickeln begonnen werden kann.
 
 Aufgrund der historisch gewachsenen Code-Basis und den sich stetig entwickelnden Anforderungen hat das BLS eine gewisse Komplexität erreicht. Die Nutzung einer gängigen Schichtenarchitektur war und ist zu jedem Zeitpunkt gut möglich, der Umstieg hat die Übersichtlichkeit und Zuständigkeit der einzelnen Komponenten jedoch merklich verbessert. Neben deutlich kleineren Klassen, einfacher testbaren Teilbereichen des Systems und einer verbesserten inhaltlichen Gruppierung ist ein leichterer Einstieg für neue Entwicklerinnen in das Projekt gegeben. Das Umsetzen neuer Funktionalitäten im Projekt fällt grundsätzlich leichter, birgt aufgrund der Anforderung der Rückwärtskompatibilität an machen Stellen jedoch auch ihre Tücken, wenn beide Architekturen in bereits bestehenden Komponenten zusammengeführt werden müssen.
 
 \section{Ausblick}
 \label{sec:ausblick}
-Das Better Life System befindet sich zum Zeitpunkt des Verfassens dieser Arbeit weiterhin in Entwicklung und wird voraussichtlich auch noch einige Zeit weiterentwickelt werden. Da die Umstellung auf das CQRS Pattern laufend durchgeführt wurde und noch nicht vollständig abgeschlossen ist, müssen noch weitere Teile des bestehenden Systems aktualisiert und entsprechend angepasst werden. Die entsprechende Basis wurde dafür während des Berufspraktikums geschaffen sowie projektspezifische Herangehensweisen und Standards festgelegt, auf denen weitere Funktionalitäten und Anpassungen aufgebaut werden können.
+Das Better Life System befindet sich zum Zeitpunkt des Verfassens dieser Arbeit weiterhin in Entwicklung und wird voraussichtlich auch noch einige Zeit weiterentwickelt werden. Da die Umstellung auf das CQRS Pattern laufend durchgeführt wurde und noch nicht vollständig abgeschlossen ist, müssen noch weitere Teile des bestehenden Systems aktualisiert und entsprechend angepasst werden. Die Basis wurde dafür während des Berufspraktikums geschaffen sowie projektspezifische Herangehensweisen und Standards festgelegt, auf denen weitere Funktionalitäten und Anpassungen aufgebaut werden können.
 
 \medskip
 
-Die Nutzung des CQRS Patterns im Vergleich zu einer gängigen Schichtenarchitektur hat sich bereits zum Zeitpunkt des Berufspraktikums und innerhalb der Fusonic GmbH bewährt und lässt sich somit auch für andere Projekte, unter Berücksichtigung der allgemeinen Vor- beziehungsweise Nachteile, empfehlen.
+Die Nutzung des CQRS Patterns hat sich, im Vergleich zu einer gängigen Schichtenarchitektur, bereits zum Zeitpunkt des Berufspraktikums und auch innerhalb der Fusonic GmbH bewährt und lässt sich somit auch für andere Projekte, unter Berücksichtigung der allgemeinen Vor- beziehungsweise Nachteile, empfehlen.
 
 % Literaturverzeichnis:
 \clearpage
