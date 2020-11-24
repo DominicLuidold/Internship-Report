@@ -18,6 +18,7 @@
 \usepackage[
     linktocpage=true,
     pdfauthor={Dominic Luidold},
+    pdftitle={Vergleich des CQRS Patterns mit der Herangehensweise einer gängigen Schichtenarchitektur}
 ]{hyperref} % Links -> \href{https://www.wikibooks.org}{Wikibooks home}
 
 % Einstellungen:
@@ -39,13 +40,13 @@
 
 \section*{Sperrvermerk}
 \label{sec:sperrvermerk}
-Auf Wunsch der Firma Fusonic GmbH, im Auftrag der Viterma Handels GmbH, ist die vorliegende Arbeit bis zum 30. November 2023 für die öffentliche Nutzung zu sperren.
+Auf Wunsch der Firma Fusonic GmbH, im Auftrag der Viterma Handels GmbH, ist die vorliegende Arbeit bis zum 24. November 2023 für die öffentliche Nutzung zu sperren.
 
 Veröffentlichung, Vervielfältigung und Einsichtnahme sind ohne ausdrückliche Genehmigung der oben genannten Firma und dem Verfasser nicht gestattet. Der Titel der Arbeit sowie das Kurzreferat/Abstract dürfen jedoch veröffentlicht werden.
 
 \vspace{5cm}
 
-\noindent Dornbirn, am 30. November 2020\hfill Unterschrift des Verfassers
+\noindent Dornbirn, am 24. November 2020\hfill Unterschrift des Verfassers
 
 \vspace{5cm}
 
@@ -60,8 +61,7 @@ Veröffentlichung, Vervielfältigung und Einsichtnahme sind ohne ausdrückliche 
     \includegraphics[width=0.4\linewidth]{images/Logo_FHV.jpg}
     \end{flushright}
     \begin{flushleft}
-    \section*{[Titel der Arbeit]}
-    \subsection*{[Untertitel der Arbeit]}
+    \section*{Vergleich des CQRS Patterns mit der Herangehensweise einer gängigen Schichtenarchitektur}
     \vspace{1cm}
 
     Bachelorarbeit I\\
@@ -83,7 +83,7 @@ Veröffentlichung, Vervielfältigung und Einsichtnahme sind ohne ausdrückliche 
 
     Vorgelegt von\newline
     Dominic Luidold\newline
-    Dornbirn, 30. November 2020
+    Dornbirn, 24. November 2020
     \end{flushleft}
 \end{titlepage}
 
@@ -116,16 +116,17 @@ Zu guter Letzt möchte ich meine Arbeit all jenen widmen, die für die Gleichbeh
 
 % Kurzreferat:
 \newpage
+\enlargethispage*{19pt}
 \section*{Kurzreferat}
 \label{sec:kurzreferat}
 
-\subsection*{[Deutscher Titel Ihrer Arbeit]}
+\subsection*{Vergleich des CQRS Patterns mit der Herangehensweise einer gängigen Schichtenarchitektur}
 
 Das \enquote{Better Life System} ist eine mittels einer Weboberfläche und gängigen Webbrowsern bedienbare Anwendung. Handelsvertreterinnen rund um die Viterma Handels GmbH können diese nutzen, um ein Badezimmer anhand der persönlichen Anforderungen und Bedürfnisse der Endkunden zu konfigurieren und ein entsprechendes Angebot dafür zu erstellen.
 
 \medskip
 
-Das Better Life System ist bereits seit Frühjahr 2017 in Entwicklung und baut auf einer gängigen Schichtenarchitektur sowie der Programmiersprache PHP und dem PHP-Framework \enquote{Symfony} auf. Aufgrund von sich weiterentwickelnden Anforderungen an das Projekt und einer damit verbundenen, historisch gewachsenen Komplexität wurde der Entschluss getroffen, die Schichtenarchitektur sukzessive durch die Implementierung des \enquote{Command Query Responsibility Segregation} Patterns (kurz \enquote{CQRS}) zu ersetzen. Die Umstellung soll die Wartbarkeit und Erweiterbarkeit fördern sowie die Codequalität und Testbarkeit nachhaltig verbessern.
+Das Better Life System ist bereits seit Frühjahr 2017 in Entwicklung und baut auf einer gängigen Schichtenarchitektur sowie der Programmiersprache PHP und dem PHP-Framework \enquote{Symfony} auf. Aufgrund von sich weiterentwickelnden Anforderungen an das Projekt und einer damit verbundenen, historisch gewachsenen Komplexität wurde der Entschluss getroffen, die Schichtenarchitektur sukzessive durch die Implementierung des \enquote{Command Query Responsibility Segregation} Patterns (\enquote{CQRS}) zu ersetzen. Die Umstellung soll die Wartbarkeit und Erweiterbarkeit fördern sowie die Codequalität und Testbarkeit nachhaltig verbessern.
 
 \medskip
 
@@ -140,13 +141,13 @@ Die zu Beginn des Praktikums festgelegten Ziele konnten erfolgreich erfüllt wer
 \section*{Abstract}
 \label{sec:abstract}
 
-\subsection*{[English Title of your thesis]}
+\subsection*{Comparison of the CQRS Pattern With the Approach of a Common Multi-Tier Architecture}
 
 The \enquote{Better Life System} is an application that can be operated via a web interface and common web browsers. Sales representatives around Viterma Handels GmbH can use it to configure a bathroom according to the personal requirements and needs of the end customer and to create a corresponding offer for it.
 
 \medskip
 
-The Better Life System has been in development since spring 2017 and is based on a multitier architecture as well as the PHP programming language and the PHP framework \enquote{Symfony}. Due to evolving project requirements and a related, historically grown complexity, the decision was made to successively replace the layer architecture by implementing the \enquote{Command Query Responsibility Segregation} pattern (short \enquote{CQRS}). The migration should promote maintainability and expandability as well as improve code quality and testability in the long term.
+The Better Life System has been in development since spring 2017 and is based on a multi-tier architecture as well as the PHP programming language and the PHP framework \enquote{Symfony}. Due to evolving project requirements and a related, historically grown complexity, the decision was made to successively replace the multi-tier architecture by implementing the \enquote{Command Query Responsibility Segregation} pattern (\enquote{CQRS}). The migration should promote maintainability and expandability as well as improve code quality and testability in the long term.
 
 \medskip
 
@@ -154,7 +155,7 @@ The CQRS pattern describes the separation of reading and writing actions that ar
 
 \medskip
 
-The objectives set at the beginning of the internship were successfully met and the Better Life System now uses the CQRS pattern for pre-existing sub-areas and newly developed functionalities. The desired improvement of the code quality, easier expandability and testability was achieved in the adapted areas and the final migration is being carried out continuously in the further development of the project.
+The objectives set at the beginning of the internship were successfully met and the Better Life System now uses the CQRS pattern for pre-existing sub-areas and newly developed functionalities. The desired improvement of the code quality, easier expandability and testability was achieved in the refactored areas and the final migration is being carried out continuously in the further development of the project.
 
 % Geschlechtergerechte Sprache:
 \newpage
@@ -199,11 +200,11 @@ Um die Lesbarkeit zu gewährleisten und zugunsten der Textökonomie werden die v
 \label{chap:einleitung}
 Diese Bachelorarbeit verfolgt das Ziel, einen Einblick in die Implementierung und Erweiterung des bereits bestehenden Backend-Systems des \enquote{Better Life System} (kurz \enquote{BLS}) der Viterma Handels GmbH mit dem sogenannten \enquote{CQRS}-Pattern zu geben.
 
-Das Better Life System - welches von Fusonic GmbH entwickelt wird und mittels einer Weboberfläche und gängigen Webbrowsern bedient werden kann - ermöglicht es Handelsvertreterinnen (beziehungsweise Vertreterinnen eines ihrer Franchise-Partner) zusammen mit ihren Endkunden ein Badezimmer anhand der jeweiligen Bedürfnisse auszusuchen und zu konfigurieren, um schlussendlich ein entsprechendes Angebot dafür erstellen zu lassen.
+Das Better Life System - welches von Fusonic GmbH entwickelt wird und mittels einer Weboberfläche und gängigen Webbrowsern bedient werden kann - ermöglicht es Handelsvertreterinnen der Viterma Handels GmbH (beziehungsweise Vertreterinnen eines ihrer Franchise-Partner) zusammen mit ihren Endkunden ein Badezimmer anhand der jeweiligen Bedürfnisse auszusuchen und zu konfigurieren, um schlussendlich ein entsprechendes Angebot dafür erstellen zu lassen.
 
 \section{Arbeitgeber Fusonic GmbH}
 \label{sec:arbeitgeber}
-Die Fusonic GmbH hat ihren Firmensitz in Götzis, Vorarlberg, und besteht aus einem Team von aktuell mehr als 25 Angestellten, Softwareentwicklerinnen und Projektleiterinnen. Diese sind aufgeteilt in diverse kleinere Teams, die intern unter anderem \enquote{Duck-Team} beziehungsweise \enquote{Parrot-Team} genannt werden. Die Teams arbeiten dabei an jeweils eigenständigen Projekten und setzen diverse Technologien ein. Zu den verwendeten Technologien gehören unter anderem C\# mit .NET, PHP mit Symfony und JavaScript/TypeScript mit Angular \parencite[]["Übersicht aller Technologien"]{fusonic_gmbh_web_2020}. Während es regelmäßigen Austausch unter den Teams gibt, besteht jedes aus Frontend- sowie Backend-Entwicklerinnen, da die meisten Projekte - aufgrund der zugrundeliegenden Anwendungsfälle - aus einem Web-Frontend sowie serverseitigen Backend bestehen.
+Die Fusonic GmbH hat ihren Firmensitz in Götzis, Vorarlberg, und besteht aus einem Team von aktuell mehr als 25 Angestellten, Softwareentwicklerinnen und Projektleiterinnen. Diese sind aufgeteilt in diverse kleinere Teams, die intern unter anderem \enquote{Duck-Team} oder auch \enquote{Parrot-Team} genannt werden. Die Teams arbeiten dabei an jeweils eigenständigen Projekten und setzen diverse Technologien ein. Zu den verwendeten Technologien gehören unter anderem C\# mit .NET, PHP mit Symfony und JavaScript/TypeScript mit Angular \parencite[]["Übersicht aller Technologien"]{fusonic_gmbh_web_2020}. Während es regelmäßigen Austausch unter den Teams gibt, besteht jedes aus Frontend- sowie Backend-Entwicklerinnen, da die meisten Projekte - aufgrund der zugrundeliegenden Anwendungsfälle - aus einem Web-Frontend sowie serverseitigen Backend bestehen.
 
 \section{Nutzung \& Umfeld des \enquote{Better Life System}}
 \label{sec:nutzung-umfeld}
@@ -227,6 +228,9 @@ Die Entwicklung des BLS hat im Frühjahr 2017 begonnen und die Anwendung ist sei
 
 Die bisher bei der Umsetzung des Projekts verwendete Struktur sowie der Aufbau wurde stark an die empfohlene Herangehensweise von Symfony angelehnt und die Code-Basis entsprechend darauf ausgelegt \parencite[siehe dazu][\enquote{Use the Default Directory Structure}]{symfony_symfony_2020}. Durch wachsende Anforderungen und entsprechend benötigten Programmcode, der diese erfüllt, hat sich jedoch ein komplexes System ergeben, dessen \textit{Controller}, \textit{Entities}, \textit{Manager (Services)} und \textit{Data Transfer Objects (DTOs)} auf viele Verzeichnisse und Unterverzeichnisse verteilt sind. Die Abbildung~\ref{fig:ordnerstruktur} auf Seite \pageref{fig:ordnerstruktur} zeigt einen Ausschnitt von Ordnern die im Projekt vorkommen und jeweils alle Klassen ihrer Art beinhalten (im Verzeichnis \enquote{Controller} befinden sich, um ein Beispiel zu nennen, alle Controller des Projekts).
 
+\pagebreak
+\enlargethispage*{26pt}
+
 \begin{figure}[ht]
     \centering
     \includegraphics[scale=0.75]{images/bls_folder_structure.png}
@@ -234,9 +238,11 @@ Die bisher bei der Umsetzung des Projekts verwendete Struktur sowie der Aufbau w
     \label{fig:ordnerstruktur}
 \end{figure}
 
-Durch die bisher gewählte Herangehensweise und den entsprechenden Aufbau hat sich jedoch ergeben, dass eine logische Gruppierung beziehungsweise Kapselung von zusammengehörenden Klassen, Controllern, Managern etc. eines API Endpunkts nur schwer möglich ist. Das hat zur Folge, dass das System an manchen Stellen sehr komplex aufgebaut ist und externe Personen eine gewisse Zeit brauchen, um sich mit internen Abläufen vertraut machen zu können. Neben der Verständlichkeit ist dadurch in weiterer Folge auch die Wartbarkeit und einfache Erweiterbarkeit im Falle von neuen Funktionalitäten nicht im vollen Ausmaß gegeben. Auf das Testen einzelner Bestandteile mittels sogenannter \textit{Unit Tests} wird im gesamten Projekt gesetzt. Primär werden beim Better Life System \textit{Smoke Tests} sowie \textit{Funktionale Tests} verwendet, die im Problemfall darauf hindeuten können, wo ein Fehler aufgetreten ist.
+Durch die bisher gewählte Herangehensweise und den entsprechenden Aufbau hat sich jedoch ergeben, dass eine logische Gruppierung beziehungsweise Kapselung von zusammengehörenden Klassen, Controllern, Managern etc. eines API Endpunkts nur schwer möglich ist. Das hat zur Folge, dass das System an manchen Stellen sehr komplex aufgebaut ist und externe Personen eine gewisse Zeit brauchen, um sich mit internen Abläufen vertraut machen zu können. Neben der Verständlichkeit ist dadurch in weiterer Folge auch die Wartbarkeit und einfache Erweiterbarkeit im Falle von neuen Funktionalitäten nicht im vollen Ausmaß gegeben. Im gesamten Projekt wird auf das Testen einzelner Bestandteile mittels sogenannter \textit{Unit Tests} gesetzt. Primär werden beim Better Life System \textit{Smoke Tests} sowie \textit{Funktionale Tests} verwendet, die im Problemfall darauf hindeuten können, wo ein Fehler aufgetreten ist. Das detaillierte Testen einzelner Bestandteile auf kleinster Ebene ist mit dem aktuellen Ansatz jedoch nur bedingt umsetzbar.
 
 Da sich die Anforderungen an das Backend auch in Zukunft noch weiterentwickeln können und eine Skalierung der Infrastruktur beziehungsweise Abspaltung einzelner Teile (in sogenannte Microservices) nicht ausgeschlossen werden kann, bedarf es Möglichkeiten, dies möglichst effektiv und ohne großen, zusätzlichen Aufwand umsetzen zu können. Die von Symfony empfohlene Herangehensweise kann dies dabei nur bedingt unterstützen, was auch in diesem Fall einen limitierenden Faktor darstellt.
+
+\pagebreak
 
 \section{Anforderungen}
 \label{sec:anforderungen}
@@ -288,7 +294,7 @@ Symfony selbst gibt in der eigenen Dokumentation keine verpflichtenden Vorgaben 
 
 \begin{itemize}
     \item \textbf{Model:} Dem Model entsprechen die im \textit{Entity}-Verzeichnis abgelegten Klassen. Diese beinhalten das objektrelationale Mapping und können zusätzliche, domänenspezifische Funktionalitäten zur Verfügung stellen. Die Klassen, die im \textit{Repository}-Verzeichnis zu finden sind, stellen den Zugriff auf die Datenbank her und befüllen die Entities beziehungsweise Models mit Daten. \parencite[][]{tutorials_point_i_pvt_ltd_symfony_nodate}
-    \item \textbf{View:} Im Falle der hier angenommenen Standardstruktur, wird der View-Teil mittels der Template Engine \textit{Twig} im gleichnamigen Verzeichnis abgehandelt. Im Falle des BLS ist dies mittels Data Transfer Objects gelöst, die bei den jeweiligen API Endpunkten als serialisierte JSON-Response zurückgegeben werden. \parencite[][]{tutorials_point_i_pvt_ltd_symfony_nodate}
+    \item \textbf{View:} Im Falle der hier angenommenen Standardstruktur, wird der View-Teil mittels der Template Engine \textit{Twig} im gleichnamigen Verzeichnis abgehandelt. \parencite[][]{tutorials_point_i_pvt_ltd_symfony_nodate} Im Falle des BLS ist dies mittels Data Transfer Objects gelöst, die bei den jeweiligen API Endpunkten als serialisierte JSON-Response zurückgegeben werden.
     \item \textbf{Controller:} Die von der Namensgebung her am leichtesten zu erkennende Ähnlichkeit stellt das \textit{Controller}-Verzeichnis dar. Die darin vorhandenen Klassen werden verwendet, um eingehende Requests zu mappen. Diese Controller-Klassen sollten jedoch nur wenige Zeilen Code beinhalten, um Berechtigungen zu überprüfen sowie die Response zu erstellen. Die tatsächliche Businesslogik wird in separate Klassen aufgeteilt, die vom Controller aufgerufen werden, um diese möglichst zu entkoppeln. \parencite[][]{symfony_symfony_2020} Beim BLS liegt die Anwendungslogik beispielsweise in einem \textit{Manager}-Verzeichnis.
 \end{itemize}
 
@@ -594,6 +600,6 @@ Ich erkläre hiermit an Eides statt, dass ich die vorliegende Bachelorarbeit I s
 
 \vspace{5cm}
 \noindent
-Dornbirn, am 30. November 2020\hfill Dominic Luidold
+Dornbirn, am 24. November 2020\hfill Dominic Luidold
 
 \end{document}
